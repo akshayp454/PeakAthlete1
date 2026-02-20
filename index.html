@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak Athlete | Data-Driven School Sports Platform</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Transforming school sports into data-driven physical development with AI-powered fitness assessment and talent identification platform. NEP 2020 aligned.">
+    <meta name="keywords" content="school sports, physical education, fitness assessment, talent identification, AI sports platform, NEP 2020, data-driven education">
+    <meta name="author" content="Peak Athlete">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://peakathlete.in/">
+    <meta property="og:title" content="Peak Athlete | Data-Driven School Sports Platform">
+    <meta property="og:description" content="Transforming school sports into data-driven physical development with AI-powered fitness assessment and talent identification platform.">
+    <meta property="og:image" content="https://peakathlete.in/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://peakathlete.in/">
+    <meta property="twitter:title" content="Peak Athlete | Data-Driven School Sports Platform">
+    <meta property="twitter:description" content="Transforming school sports into data-driven physical development with AI-powered fitness assessment and talent identification platform.">
+    <meta property="twitter:image" content="https://peakathlete.in/og-image.jpg">
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" type="image/x-icon" href="#">
+    <link rel="apple-touch-icon" href="#">
+
+    <!-- Font Awesome & Google Fonts (external for performance) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- INLINE STYLES (refactored and cleaned) -->
+    <style>
+        /* ===== CSS RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors */
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            
+            /* Secondary Colors */
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --secondary-light: #34d399;
+            
+            /* Accent Colors */
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --accent-light: #fbbf24;
+            
+            /* Neutral Colors */
+            --dark: #111827;
+            --dark-light: #1f2937;
+            --light: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #ef4444 100%);
+            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, #2d3748 100%);
+            
+            /* Typography */
+            --font-primary: 'Inter', sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+            --font-size-6xl: 4rem;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 6rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--light);
+            color: var(--gray-800);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        h1 { font-size: var(--font-size-5xl); }
+        h2 { font-size: var(--font-size-4xl); }
+        h3 { font-size: var(--font-size-3xl); }
+        h4 { font-size: var(--font-size-2xl); }
+        h5 { font-size: var(--font-size-xl); }
+        h6 { font-size: var(--font-size-lg); }
+        p { margin-bottom: var(--spacing-md); color: var(--gray-600); }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* ===== ACCESSIBILITY ===== */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+        .skip-link:focus { top: 6px; }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--spacing-md) 0;
+            transition: all var(--transition-base);
+        }
+        .navbar.scrolled {
+            padding: var(--spacing-sm) 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--dark);
+            gap: var(--spacing-sm);
+        }
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: var(--font-size-xl);
+        }
+        .logo span { color: var(--primary); }
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--dark);
+            border-radius: var(--radius-full);
+            transition: all var(--transition-base);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+        .nav-menu { display: flex; align-items: center; }
+        .nav-list {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: var(--spacing-xl);
+        }
+        .nav-link {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: var(--font-size-base);
+            padding: var(--spacing-sm) 0;
+            position: relative;
+            transition: all var(--transition-base);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--primary); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-base);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-md);
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md) var(--spacing-2xl);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            transition: all var(--transition-base);
+            border: none;
+            cursor: pointer;
+            gap: var(--spacing-sm);
+        }
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-tag {
+            display: inline-flex;
+            background: rgba(37,99,235,0.1);
+            color: var(--primary);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xl);
+        }
+        .hero-title {
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.1;
+        }
+        .hero-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-2xl);
+            max-width: 600px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+        .hero-stats {
+            display: flex;
+            gap: var(--spacing-2xl);
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+        .dashboard-preview {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-2xl);
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+        .dashboard-header {
+            background: var(--gradient-dark);
+            color: white;
+            padding: var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dashboard-metrics { display: flex; gap: var(--spacing-lg); }
+        .metric {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+        }
+        .metric i { color: var(--accent); }
+        .dashboard-content { padding: var(--spacing-xl); }
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-placeholder::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: repeating-linear-gradient(90deg,transparent,transparent 20px,rgba(255,255,255,0.5) 20px,rgba(255,255,255,0.5) 40px);
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+        .data-item {
+            background: var(--gray-50);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+        .data-label {
+            font-size: var(--font-size-sm);
+            color: var(--gray-500);
+            margin-bottom: var(--spacing-xs);
+        }
+        .data-value {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        .data-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+        }
+        .data-trend.up { background: rgba(16,185,129,0.1); color: var(--secondary); }
+
+        /* ===== SECTION COMMON ===== */
+        section { padding: var(--spacing-4xl) 0; }
+        .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
+        .section-title { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-lg); }
+        .section-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--gray-600);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ===== PROBLEM SECTION ===== */
+        .problem-section { background: var(--gray-50); }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+        .problem-card {
+            background: white;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+        }
+        .problem-icon {
+            width:60px; height:60px;
+            background: linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);
+            border-radius: var(--radius-lg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-2xl);
+            color:#dc2626; margin-bottom: var(--spacing-lg);
+        }
+        .problem-content h3 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-md); color: var(--gray-800); }
+        .problem-stat { font-size: var(--font-size-4xl); font-weight: 800; color:#dc2626; margin-bottom: var(--spacing-sm); }
+        .problem-stats { display: flex; gap: var(--spacing-lg); margin-top: var(--spacing-md); }
+        .mini-stat { text-align: center; flex:1; }
+        .mini-value { font-size: var(--font-size-2xl); font-weight: 800; color:#dc2626; margin-bottom: var(--spacing-xs); }
+        .mini-label { font-size: var(--font-size-sm); color: var(--gray-600); }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: var(--spacing-lg);
+        }
+        .challenge-card {
+            background: white; border-radius: var(--radius-lg); padding: var(--spacing-lg);
+            border:1px solid var(--gray-200); transition: all var(--transition-base);
+        }
+        .challenge-card h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--dark); }
+        .challenge-card p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+        .challenge-card.highlight { background: var(--gradient-primary); color: white; border:none; }
+        .challenge-card.highlight h4, .challenge-card.highlight p { color: white; }
+
+        /* ===== SOLUTION SECTION ===== */
+        .solution-section { background: white; }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+        .features-list { margin-top: var(--spacing-xl); }
+        .feature-item {
+            display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);
+        }
+        .feature-icon {
+            width:50px; height:50px;
+            background: linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
+            border-radius: var(--radius-lg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-xl); color: var(--primary); flex-shrink:0;
+        }
+        .feature-text h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-xs); color: var(--dark); }
+        .feature-text p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+        .platform-mockup {
+            background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-2xl);
+            border:1px solid var(--gray-200); overflow: hidden;
+        }
+        .mockup-tabs { display: flex; background: var(--gray-100); border-bottom:1px solid var(--gray-200); }
+        .tab {
+            flex:1; padding: var(--spacing-lg); text-align: center; font-weight: 600;
+            color: var(--gray-500); cursor: pointer; transition: all var(--transition-base);
+            border-bottom:3px solid transparent;
+        }
+        .tab.active { color: var(--primary); border-bottom-color: var(--primary); background: white; }
+        .mockup-content { padding: var(--spacing-2xl); min-height:400px; position: relative; }
+        .insight-card {
+            position: absolute; top: var(--spacing-2xl); left: var(--spacing-2xl); right: var(--spacing-2xl);
+            opacity:0; visibility:hidden; transform: translateY(10px); transition: all var(--transition-base);
+        }
+        .insight-card.active { opacity:1; visibility:visible; transform: translateY(0); }
+        .insight-card h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); }
+        .insight-chart, .talent-radar, .integration-flow {
+            height:200px; background: linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);
+            border-radius: var(--radius-lg); position: relative; overflow: hidden;
+        }
+        .insight-chart::before, .talent-radar::before, .integration-flow::before {
+            content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+            background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.5) 20px,rgba(255,255,255,0.5) 40px);
+            animation: shimmer 2s infinite linear;
+        }
+
+        /* ===== TIMING SECTION ===== */
+        .timing-section { background: white; }
+        .timing-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--spacing-xl);
+        }
+        .timing-card {
+            background: var(--gray-50); border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            border:1px solid var(--gray-200); transition: all var(--transition-base);
+        }
+        .timing-card.highlight { background: var(--gradient-primary); color: white; border:none; }
+        .timing-card.highlight h3, .timing-card.highlight li { color: white; }
+        .timing-icon {
+            width:60px; height:60px; background: white; border-radius: var(--radius-lg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-2xl); color: var(--primary); margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+        }
+        .timing-card.highlight .timing-icon { background: rgba(255,255,255,0.2); color: white; }
+        .timing-card h3 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-lg); }
+        .timing-list { list-style: none; }
+        .timing-list li {
+            padding: var(--spacing-xs) 0; color: var(--gray-600);
+            position: relative; padding-left: var(--spacing-lg);
+        }
+        .timing-list li::before { content:'✓'; position:absolute; left:0; color: var(--primary); font-weight:600; }
+        .timing-card.highlight .timing-list li::before { color: white; }
+        .goa-features { display: grid; gap: var(--spacing-md); margin-top: var(--spacing-lg); }
+        .goa-feature { display: flex; align-items: center; gap: var(--spacing-md); font-size: var(--font-size-sm); }
+        .goa-feature i {
+            width:30px; height:30px; background: rgba(255,255,255,0.2);
+            border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ===== BUSINESS MODEL ===== */
+        .business-section { background: var(--gray-50); }
+        .business-model {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-3xl);
+            align-items: start;
+        }
+        .model-card {
+            background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            box-shadow: var(--shadow-2xl); border:2px solid var(--primary); text-align: center;
+        }
+        .model-header { margin-bottom: var(--spacing-2xl); }
+        .model-icon {
+            width:80px; height:80px; background: var(--gradient-primary);
+            border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-3xl); color: white; margin:0 auto var(--spacing-lg);
+        }
+        .model-card h3 { font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md); }
+        .model-price { display: flex; align-items: baseline; justify-content: center; gap: var(--spacing-xs); margin-top: var(--spacing-lg); }
+        .price { font-size: var(--font-size-5xl); font-weight: 800; color: var(--primary); }
+        .period { font-size: var(--font-size-lg); color: var(--gray-500); }
+        .model-features { margin: var(--spacing-2xl) 0; text-align: left; }
+        .model-feature {
+            display: flex; align-items: center; gap: var(--spacing-md);
+            padding: var(--spacing-md) 0; border-bottom:1px solid var(--gray-200);
+        }
+        .model-feature i { color: var(--primary); font-size: var(--font-size-sm); }
+        .model-feature span { font-weight: 500; color: var(--gray-700); }
+        .model-extra {
+            background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            border:1px solid var(--gray-200);
+        }
+        .model-extra h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-lg); color: var(--dark); }
+        .extra-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--spacing-lg);
+        }
+        .extra-item {
+            padding: var(--spacing-lg); background: var(--gray-50);
+            border-radius: var(--radius-lg); border:1px solid var(--gray-200);
+        }
+        .extra-item h5 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--dark); }
+        .extra-item p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+
+        /* ===== IMPACT SECTION ===== */
+        .impact-section { background: white; }
+        .impact-tab-header {
+            display: flex; justify-content: center; gap: var(--spacing-md); margin-bottom: var(--spacing-3xl); flex-wrap: wrap;
+        }
+        .impact-tab-btn {
+            padding: var(--spacing-md) var(--spacing-2xl); background: var(--gray-100);
+            border:1px solid var(--gray-300); border-radius: var(--radius-full); color: var(--gray-600);
+            font-weight: 600; cursor: pointer; transition: all var(--transition-base);
+        }
+        .impact-tab-btn:hover, .impact-tab-btn.active {
+            background: var(--gradient-primary); color: white; border-color: transparent; box-shadow: var(--shadow-md);
+        }
+        .impact-tab-content { display: none; }
+        .impact-tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: var(--spacing-xl);
+        }
+        .outcome-card {
+            background: var(--gray-50); border-radius: var(--radius-lg); padding: var(--spacing-xl);
+            border:1px solid var(--gray-200); transition: all var(--transition-base);
+        }
+        .outcome-icon {
+            width:60px; height:60px; background: linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
+            border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-xl); color: var(--primary); margin-bottom: var(--spacing-lg);
+        }
+        .outcome-card h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: var(--dark); }
+        .outcome-card p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+        .data-visibility {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+        .data-stats { display: grid; gap: var(--spacing-xl); }
+        .data-stat {
+            text-align: center; padding: var(--spacing-xl); background: var(--gradient-primary);
+            border-radius: var(--radius-xl); color: white;
+        }
+        .data-stat .stat-number { font-size: var(--font-size-4xl); color: white; margin-bottom: var(--spacing-xs); }
+        .data-stat .stat-label { color: rgba(255,255,255,0.9); font-size: var(--font-size-base); }
+        .data-features h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-lg); color: var(--dark); }
+        .data-list { list-style: none; display: grid; gap: var(--spacing-md); }
+        .data-list li {
+            padding: var(--spacing-md); background: var(--gray-50); border-radius: var(--radius-md);
+            border:1px solid var(--gray-200); font-weight: 500; color: var(--gray-700);
+            position: relative; padding-left: var(--spacing-xl);
+        }
+        .data-list li::before { content:'•'; position:absolute; left:var(--spacing-md); color: var(--primary); font-weight:800; }
+
+        /* ===== TRACTION SECTION ===== */
+        .traction-section { background: var(--gray-50); }
+        .traction-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-3xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+        .traction-metrics { display: grid; gap: var(--spacing-xl); }
+        .traction-metric {
+            background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            text-align: center; box-shadow: var(--shadow-lg); border:1px solid var(--gray-200);
+        }
+        .metric-number {
+            font-size: var(--font-size-5xl); font-weight: 800;
+            background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text;
+            color: transparent; margin-bottom: var(--spacing-sm);
+        }
+        .metric-label { font-size: var(--font-size-base); color: var(--gray-600); font-weight: 500; }
+        .traction-testimonial {
+            background: white; border-radius: var(--radius-xl); padding: var(--spacing-3xl);
+            box-shadow: var(--shadow-2xl); border:1px solid var(--gray-200); position: relative;
+        }
+        .quote-icon {
+            font-size: var(--font-size-6xl); color: var(--primary); opacity:0.2;
+            position: absolute; top: var(--spacing-xl); left: var(--spacing-xl);
+        }
+        .testimonial-text {
+            font-size: var(--font-size-lg); line-height:1.8; color: var(--gray-700);
+            margin-bottom: var(--spacing-2xl); position: relative; z-index:1;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: var(--spacing-lg); }
+        .author-avatar {
+            width:60px; height:60px; background: var(--gradient-primary);
+            border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-xl); font-weight: 700; color: white;
+        }
+        .author-info .author-name { font-size: var(--font-size-lg); font-weight: 700; color: var(--dark); margin-bottom: var(--spacing-xs); }
+        .author-info .author-school { font-size: var(--font-size-base); color: var(--gray-600); }
+        .partnership-logos { display: flex; justify-content: center; gap: var(--spacing-xl); flex-wrap: wrap; }
+        .logo-item {
+            padding: var(--spacing-md) var(--spacing-xl); background: white; border-radius: var(--radius-lg);
+            border:1px solid var(--gray-200); font-weight: 600; color: var(--gray-700); transition: all var(--transition-base);
+        }
+        .logo-item:hover { border-color: var(--primary); color: var(--primary); box-shadow: var(--shadow-md); }
+
+        /* ===== GTM SECTION ===== */
+        .gtm-section { background: white; }
+        .gtm-timeline { max-width:900px; margin:0 auto; position: relative; }
+        .gtm-timeline::before {
+            content:''; position:absolute; left:100px; top:0; bottom:0;
+            width:4px; background: var(--gradient-primary); border-radius: var(--radius-full);
+        }
+        .timeline-phase { display: flex; gap: var(--spacing-xl); margin-bottom: var(--spacing-3xl); position: relative; }
+        .phase-number {
+            width:100px; height:100px; background: white; border:4px solid var(--primary);
+            border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-3xl); font-weight: 800; color: var(--primary); flex-shrink:0; z-index:1;
+        }
+        .phase-content {
+            flex:1; background: var(--gray-50); border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl); border:1px solid var(--gray-200);
+        }
+        .phase-content h3 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); color: var(--dark); }
+        .phase-target { font-size: var(--font-size-lg); font-weight:700; color: var(--primary); margin-bottom: var(--spacing-lg); }
+        .phase-tasks { list-style: none; }
+        .phase-tasks li {
+            padding: var(--spacing-xs) 0; color: var(--gray-600);
+            position: relative; padding-left: var(--spacing-lg);
+        }
+        .phase-tasks li::before { content:'→'; position:absolute; left:0; color: var(--primary); font-weight:600; }
+
+        /* ===== TECHNOLOGY SECTION ===== */
+        .tech-section { background: var(--gray-50); }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--spacing-3xl);
+        }
+        .tech-column h3 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-xl); color: var(--dark); }
+        .tech-feature { display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+        .tech-icon {
+            width:50px; height:50px; background: linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
+            border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-xl); color: var(--primary); flex-shrink:0;
+        }
+        .tech-text h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-xs); color: var(--dark); }
+        .tech-text p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section { background: white; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+        }
+        .contact-info { display: grid; gap: var(--spacing-xl); }
+        .contact-card {
+            display: flex; align-items: flex-start; gap: var(--spacing-lg);
+            padding: var(--spacing-xl); background: var(--gray-50); border-radius: var(--radius-xl);
+            border:1px solid var(--gray-200); transition: all var(--transition-base);
+        }
+        .contact-icon {
+            width:50px; height:50px; background: var(--gradient-primary);
+            border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+            font-size: var(--font-size-xl); color: white; flex-shrink:0;
+        }
+        .contact-details h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-xs); color: var(--dark); }
+        .contact-details p { font-size: var(--font-size-base); color: var(--gray-600); margin:0; }
+        .demo-card {
+            background: var(--gradient-primary); border-radius: var(--radius-xl); padding: var(--spacing-2xl); color: white;
+        }
+        .demo-card h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); color: white; }
+        .demo-card p { font-size: var(--font-size-base); color: rgba(255,255,255,0.9); margin-bottom: var(--spacing-lg); }
+        .contact-form {
+            background: var(--gray-50); border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            border:1px solid var(--gray-200);
+        }
+        .contact-form h3 { font-size: var(--font-size-2xl); margin-bottom: var(--spacing-xl); color: var(--dark); }
+        .form-group { margin-bottom: var(--spacing-lg); }
+        .form-group input, .form-group select, .form-group textarea {
+            width:100%; padding: var(--spacing-md) var(--spacing-lg);
+            border:1px solid var(--gray-300); border-radius: var(--radius-lg);
+            font-family: var(--font-primary); font-size: var(--font-size-base); color: var(--gray-800);
+            transition: all var(--transition-base);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline:none; border-color: var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height:120px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark); color: white; padding: var(--spacing-4xl) 0 var(--spacing-xl);
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: var(--spacing-4xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+        .footer-brand .logo { color: white; margin-bottom: var(--spacing-lg); }
+        .footer-tagline { font-size: var(--font-size-lg); color: var(--gray-300); margin:0; }
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--spacing-xl);
+        }
+        .link-column h5 { font-size: var(--font-size-lg); color: white; margin-bottom: var(--spacing-lg); }
+        .link-column a {
+            display: block; color: var(--gray-400); text-decoration: none;
+            padding: var(--spacing-xs) 0; transition: all var(--transition-base);
+        }
+        .link-column a:hover { color: white; padding-left: var(--spacing-sm); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: var(--spacing-xl); border-top:1px solid var(--gray-800);
+        }
+        .copyright p { color: var(--gray-400); margin:0; font-size: var(--font-size-sm); }
+        .social-links { display: flex; gap: var(--spacing-lg); }
+        .social-links a {
+            width:40px; height:40px; background: var(--gray-800); border-radius: var(--radius-full);
+            display: flex; align-items: center; justify-content: center; color: white;
+            text-decoration: none; transition: all var(--transition-base);
+        }
+        .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            :root { --font-size-5xl:2.5rem; --font-size-6xl:3rem; --font-size-4xl:2rem; }
+            .hero .container, .solution-grid, .market-projection, .traction-grid, .contact-grid { grid-template-columns:1fr; }
+            .hero-visual { order:-1; }
+            .problem-grid, .timing-grid, .tech-grid, .footer-links { grid-template-columns:repeat(2,1fr); }
+            .business-model { grid-template-columns:1fr; }
+            .data-visibility { grid-template-columns:1fr; }
+        }
+        @media (max-width: 768px) {
+            :root { --font-size-5xl:2.25rem; --font-size-6xl:2.5rem; --font-size-4xl:1.75rem; --font-size-3xl:1.5rem; }
+            .container { padding:0 var(--spacing-md); }
+            section { padding:var(--spacing-3xl) 0; }
+            .menu-toggle { display:block; }
+            .nav-menu {
+                position: fixed; top:80px; right:-100%; width:300px; height:calc(100vh - 80px);
+                background: white; padding:var(--spacing-2xl); transition: right var(--transition-base);
+                box-shadow: var(--shadow-2xl); overflow-y:auto;
+            }
+            .nav-menu.active { right:0; }
+            .nav-list { flex-direction: column; align-items:flex-start; gap:var(--spacing-md); }
+            .hero-buttons { flex-direction: column; gap:var(--spacing-md); }
+            .hero-stats { flex-direction: column; gap:var(--spacing-lg); }
+            .problem-grid, .timing-grid, .tech-grid, .extra-grid { grid-template-columns:1fr; }
+            .gtm-timeline::before { left:30px; }
+            .timeline-phase { flex-direction: column; gap:var(--spacing-md); }
+            .phase-number { width:60px; height:60px; font-size:var(--font-size-xl); }
+            .footer-content { grid-template-columns:1fr; gap:var(--spacing-2xl); }
+            .footer-bottom { flex-direction: column; gap:var(--spacing-lg); text-align:center; }
+        }
+        @media (max-width: 480px) {
+            :root { --font-size-5xl:2rem; --font-size-6xl:2.25rem; --font-size-4xl:1.5rem; }
+            .challenges-grid, .outcome-grid, .partnership-logos { grid-template-columns:1fr; }
+            .hero-title { font-size:var(--font-size-4xl); }
+            .dashboard-header { flex-direction: column; gap:var(--spacing-md); text-align:center; }
+            .impact-tab-header { flex-direction: column; }
+            .impact-tab-btn { width:100%; text-align:center; }
+        }
+
+        /* Animation classes */
+        .fade-in { animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo" aria-label="Peak Athlete - Home">
+                <div class="logo-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                <span>PEAK</span>ATHLETE
+            </a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" role="button">
+                <div class="hamburger" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <nav class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
+                <ul class="nav-list" role="menubar">
+                    <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
+                    <li role="none"><a href="#problem" class="nav-link" role="menuitem">The Problem</a></li>
+                    <li role="none"><a href="#solution" class="nav-link" role="menuitem">Solution</a></li>
+                    <li role="none"><a href="#market" class="nav-link" role="menuitem">Market</a></li>
+                    <li role="none"><a href="#impact" class="nav-link" role="menuitem">Impact</a></li>
+                    <li role="none"><a href="#traction" class="nav-link" role="menuitem">Traction</a></li>
+                    <li role="none"><a href="#contact" class="nav-cta" role="menuitem">Get Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="home" role="banner">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-tag"><span>NEP 2020 Aligned</span></div>
+                    <h1 class="hero-title">Turning school sports into <span class="gradient-text">data-driven</span> physical development</h1>
+                    <p class="hero-subtitle">A sports-science and AI-driven platform for school fitness assessment and talent identification</p>
+                    <div class="hero-buttons">
+                        <a href="#solution" class="btn btn-primary"><span>See Platform Demo</span><i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn btn-secondary"><i class="fas fa-calendar"></i><span>Schedule Meeting</span></a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item"><div class="stat-number" data-count="1500">0</div><div class="stat-label">Students Assessed</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="5">0</div><div class="stat-label">Partner Schools</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="99">0</div><div class="stat-label">Satisfaction Rate</div></div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="dashboard-preview">
+                        <div class="dashboard-header"><div class="dashboard-school">Assam Public School - Dashboard</div><div class="dashboard-metrics"><span class="metric"><i class="fas fa-running"></i> PPS: 87</span><span class="metric"><i class="fas fa-chart-bar"></i> APR: 92</span></div></div>
+                        <div class="dashboard-content">
+                            <div class="chart-placeholder"></div>
+                            <div class="data-grid">
+                                <div class="data-item"><div class="data-label">Physical Fitness Score</div><div class="data-value">85%</div><div class="data-trend up">+12%</div></div>
+                                <div class="data-item"><div class="data-label">Talent Identification</div><div class="data-value">78%</div><div class="data-trend up">+18%</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section" id="problem" aria-labelledby="problem-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="problem-title" class="section-title">The <span class="gradient-text">Problem</span></h2>
+                    <p class="section-subtitle">Current state of school sports and physical education in India</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-users-slash"></i></div><div class="problem-content"><h3>Limited Participation</h3><div class="problem-stat">6%</div><p>of India's population regularly participates in sports</p></div></div>
+                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-child"></i></div><div class="problem-content"><h3>Low Fitness Levels</h3><div class="problem-stat">1%</div><p>Children are Athletic/Sports Fit</p></div></div>
+                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-school"></i></div><div class="problem-content"><h3>Infrastructure Gaps</h3><div class="problem-stats"><div class="mini-stat"><div class="mini-value">23%</div><div class="mini-label">No playground</div></div><div class="mini-stat"><div class="mini-value">30%</div><div class="mini-label">No PE teachers</div></div></div></div></div>
+                </div>
+                <div class="challenges-grid">
+                    <div class="challenge-card"><h4>No Standard Assessments</h4><p>No standard assessments for physical development and talent identification</p></div>
+                    <div class="challenge-card"><h4>Subjective PE Periods</h4><p>Subjective PE periods with no measurable outcomes or progress tracking</p></div>
+                    <div class="challenge-card"><h4>Missed Opportunities</h4><p>No systematic talent identification leading to missed opportunities</p></div>
+                    <div class="challenge-card"><h4>Fragmented Efforts</h4><p>Limited ecosystem collaboration results from fragmented efforts</p></div>
+                    <div class="challenge-card highlight"><h4>62% Youth Interest</h4><p>62% youth showing interest in sports but lack infrastructure and resources</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="solution-section" id="solution">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Solution: <span class="gradient-text">Peak Athlete</span></h2>
+                    <p class="section-subtitle">Transforming school sports into data-driven physical development</p>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-content">
+                        <h3>Peak Athlete Platform</h3>
+                        <p>A sports-science and AI-driven platform for school fitness assessment and talent identification</p>
+                        <div class="features-list">
+                            <div class="feature-item"><div class="feature-icon"><i class="fas fa-clipboard-check"></i></div><div class="feature-text"><h4>Structured Assessments</h4><p>Scientific metrics for comprehensive physical evaluation</p></div></div>
+                            <div class="feature-item"><div class="feature-icon"><i class="fas fa-brain"></i></div><div class="feature-text"><h4>AI/ML Scoring System</h4><p>Generates PPS & APR scores for accurate performance tracking</p></div></div>
+                            <div class="feature-item"><div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div><div class="feature-text"><h4>Interactive Dashboards</h4><p>For students, teachers, and parents with real-time insights</p></div></div>
+                            <div class="feature-item"><div class="feature-icon"><i class="fas fa-gamepad"></i></div><div class="feature-text"><h4>Gamified Leaderboards</h4><p>Boost student engagement with competitive elements</p></div></div>
+                            <div class="feature-item"><div class="feature-icon"><i class="fas fa-user-cog"></i></div><div class="feature-text"><h4>Personalized Recommendations</h4><p>Sport recommendations based on physical attributes</p></div></div>
+                        </div>
+                    </div>
+                    <div class="solution-visual">
+                        <div class="platform-mockup">
+                            <div class="mockup-tabs"><div class="tab active">Data-Driven Insights</div><div class="tab">Talent Identification</div><div class="tab">School Integration</div></div>
+                            <div class="mockup-content">
+                                <div class="insight-card active"><h4>Track Physical Development</h4><p>With scientific metrics and progress analytics</p><div class="insight-chart"></div></div>
+                                <div class="insight-card"><h4>Discover Hidden Potential</h4><p>Through intelligent analysis and pattern recognition</p><div class="talent-radar"></div></div>
+                                <div class="insight-card"><h4>Seamless Integration</h4><p>Aligns with NEP 2020 and school curriculum</p><div class="integration-flow"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Opportunity (commented in original, kept as is) -->
+        <!-- <section class="market-section" id="market"> ... </section> -->
+
+        <!-- Why Now Section -->
+        <section class="timing-section">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Why <span class="gradient-text">Now</span></h2><p class="section-subtitle">Perfect convergence of policy, market readiness, and technology</p></div>
+                <div class="timing-grid">
+                    <div class="timing-card"><div class="timing-icon"><i class="fas fa-file-alt"></i></div><h3>NEP 2020</h3><ul class="timing-list"><li>Emphasis on holistic development</li><li>Focus on experiential learning</li><li>Physical education as integral</li><li>Mandate for measurable outcomes</li></ul></div>
+                    <div class="timing-card"><div class="timing-icon"><i class="fas fa-flag"></i></div><h3>National Sports Policy 2025</h3><ul class="timing-list"><li>Grassroots talent identification</li><li>Sports in school curriculum</li><li>Scientific assessment pathways</li><li>Development tracking systems</li></ul></div>
+                    <div class="timing-card highlight"><div class="timing-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Goa: Perfect Launchpad</h3><div class="goa-features"><div class="goa-feature"><i class="fas fa-rupee-sign"></i><span>High per capita income</span></div><div class="goa-feature"><i class="fas fa-graduation-cap"></i><span>High literacy rate</span></div><div class="goa-feature"><i class="fas fa-running"></i><span>Strong sports ecosystem</span></div><div class="goa-feature"><i class="fas fa-hands-helping"></i><span>Government support</span></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Model -->
+        <section class="business-section">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Business <span class="gradient-text">Model</span></h2><p class="section-subtitle">Sustainable revenue through school subscriptions</p></div>
+                <div class="business-model">
+                    <div class="model-card">
+                        <div class="model-header"><div class="model-icon"><i class="fas fa-school"></i></div><h3>School Subscription</h3><div class="model-price"><span class="price">₹10</span><span class="period">/student/month</span></div></div>
+                        <div class="model-features">
+                            <div class="model-feature"><i class="fas fa-check"></i><span>SaaS platform access</span></div>
+                            <div class="model-feature"><i class="fas fa-check"></i><span>Unlimited assessments</span></div>
+                            <div class="model-feature"><i class="fas fa-check"></i><span>Teacher training</span></div>
+                            <div class="model-feature"><i class="fas fa-check"></i><span>Parent dashboard access</span></div>
+                            <div class="model-feature"><i class="fas fa-check"></i><span>Quarterly reports</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary">Get Quote</a>
+                    </div>
+                    <div class="model-extra">
+                        <h4>Additional Revenue Streams</h4>
+                        <div class="extra-grid">
+                            <div class="extra-item"><h5>Advanced Analytics</h5><p>Deep dive reports and insights</p></div>
+                            <div class="extra-item"><h5>Talent Showcases</h5><p>Connect with sports academies</p></div>
+                            <div class="extra-item"><h5>Equipment Integration</h5><p>Smart sports equipment bundles</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="impact-section" id="impact">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Impact & <span class="gradient-text">Outcomes</span></h2><p class="section-subtitle">Transforming physical education with measurable results</p></div>
+                <div class="impact-tabs">
+                    <div class="impact-tab-header" role="tablist">
+                        <button class="impact-tab-btn active" data-tab="students" role="tab" aria-selected="true" aria-controls="students-tab" id="students-tab-btn">Student Development</button>
+                        <button class="impact-tab-btn" data-tab="schools" role="tab" aria-selected="false" aria-controls="schools-tab" id="schools-tab-btn">School Benefits</button>
+                        <button class="impact-tab-btn" data-tab="data" role="tab" aria-selected="false" aria-controls="data-tab" id="data-tab-btn">Data Visibility</button>
+                    </div>
+                    <div class="impact-tab-content active" id="students-tab" role="tabpanel" aria-labelledby="students-tab-btn">
+                        <div class="outcome-grid">
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-running"></i></div><h4>Enhanced Motor Skills</h4><p>Targeted tracking improves fundamental movement abilities</p></div>
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-route"></i></div><h4>Personalized Development</h4><p>Data-driven insights identify individual strengths</p></div>
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-search"></i></div><h4>Early Talent Identification</h4><p>Discover and nurture hidden athletic potential</p></div>
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-brain"></i></div><h4>Better Focus & Academic Synergy</h4><p>Physical wellness positively influences classroom performance</p></div>
+                        </div>
+                    </div>
+                    <div class="impact-tab-content" id="schools-tab" role="tabpanel" aria-labelledby="schools-tab-btn" hidden>
+                        <div class="outcome-grid">
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-chalkboard-teacher"></i></div><h4>Empowering Teachers</h4><p>Simple digital tools for faster recording and data-backed insights</p></div>
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-trophy"></i></div><h4>Elevating Reputation</h4><p>Showcase commitment to holistic development</p></div>
+                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-users"></i></div><h4>Enhanced Parent Engagement</h4><p>Transparent insights into child's physical progress</p></div>
+                        </div>
+                    </div>
+                    <div class="impact-tab-content" id="data-tab" role="tabpanel" aria-labelledby="data-tab-btn" hidden>
+                        <div class="data-visibility">
+                            <div class="data-stats">
+                                <div class="data-stat"><div class="stat-number">1500+</div><div class="stat-label">Students Tracked</div></div>
+                                <div class="data-stat"><div class="stat-number">5</div><div class="stat-label">Partner Schools</div></div>
+                                <div class="data-stat"><div class="stat-number">12+</div><div class="stat-label">Assessment Metrics</div></div>
+                            </div>
+                            <div class="data-features"><h4>Comprehensive Fitness Profiles</h4><ul class="data-list"><li>Individual progress tracking</li><li>Class-level analytics</li><li>School-wide benchmarking</li><li>Gender and age-specific insights</li></ul></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Traction Section -->
+        <section class="traction-section" id="traction">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Real-World <span class="gradient-text">Traction</span></h2><p class="section-subtitle">Impact and adoption of Peak Athlete platform</p></div>
+                <div class="traction-grid">
+                    <div class="traction-metrics">
+                        <div class="traction-metric"><div class="metric-number" data-count="1500">0</div><div class="metric-label">Students currently benefiting from our platform</div></div>
+                        <div class="traction-metric"><div class="metric-number" data-count="5">0</div><div class="metric-label">Partner schools across Goa</div></div>
+                        <div class="traction-metric"><div class="metric-number" data-count="10">0+</div><div class="metric-label">Schools with confirmed interest</div></div>
+                    </div>
+                    <div class="traction-testimonial">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">The platform is a game-changer for schools. For the first time, we have a structured, scientific way to track every child's physical development. The platform makes it incredibly easy for teachers to record assessments, and the reports it generates are professional, clear, and data-backed. Parents love being able to see their child's wellness journey, while students are motivated by the leaderboards and personalized sport recommendations. More importantly, it aligns perfectly with NEP 2020 and holistic education goals.</p>
+                        <div class="testimonial-author"><div class="author-avatar">P</div><div class="author-info"><div class="author-name">Principal</div><div class="author-school">Assam Public School</div></div></div>
+                    </div>
+                </div>
+                <div class="partnership-logos"><div class="logo-item">NEP 2020</div><div class="logo-item">National Sports Policy</div><div class="logo-item">ASSOCHAM Goa</div><div class="logo-item">State Education Bodies</div></div>
+            </div>
+        </section>
+
+        <!-- GTM Strategy -->
+        <section class="gtm-section">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Go-To-Market <span class="gradient-text">Strategy</span></h2><p class="section-subtitle">Strategic expansion from Goa to South India</p></div>
+                <div class="gtm-timeline">
+                    <div class="timeline-phase"><div class="phase-number">Phase 1</div><div class="phase-content"><h3>Goa Establishment</h3><div class="phase-target">100+ schools</div><ul class="phase-tasks"><li>Establish strong foothold</li><li>Optimize product-market fit</li><li>Build case studies</li><li>Secure government partnerships</li></ul></div></div>
+                    <div class="timeline-phase"><div class="phase-number">Phase 2</div><div class="phase-content"><h3>South India Expansion</h3><div class="phase-target">Karnataka & Kerala</div><ul class="phase-tasks"><li>Leverage high sports adoption</li><li>Education board partnerships</li><li>Regional customization</li><li>Local team setup</li></ul></div></div>
+                    <div class="timeline-phase"><div class="phase-number">Phase 3</div><div class="phase-content"><h3>National Scale</h3><div class="phase-target">1000+ schools</div><ul class="phase-tasks"><li>Scale across India</li><li>Establish industry leadership</li><li>Partnerships with sports federations</li><li>CSR initiatives integration</li></ul></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="tech-section">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Technology & <span class="gradient-text">Innovation</span></h2><p class="section-subtitle">AI/ML-powered platform built on scientific principles</p></div>
+                <div class="tech-grid">
+                    <div class="tech-column"><h3>AI/ML Models</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-robot"></i></div><div class="tech-text"><h4>Performance Analysis</h4><p>Identifies patterns in physical development and predicts future potential</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-crystal-ball"></i></div><div class="tech-text"><h4>Predictive Modeling</h4><p>Forecasts athletic growth trajectories and sport alignment</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-brain"></i></div><div class="tech-text"><h4>Continuous Learning</h4><p>Algorithms improve with each assessment, increasing accuracy over time</p></div></div></div>
+                    <div class="tech-column"><h3>Data Normalization</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-balance-scale"></i></div><div class="tech-text"><h4>Age-Adjusted Scoring</h4><p>Benchmarks performance against age-specific standards</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-venus-mars"></i></div><div class="tech-text"><h4>Gender-Specific Metrics</h4><p>Accounts for physiological differences between male and female students</p></div></div></div>
+                    <div class="tech-column"><h3>Sports Science Framework</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-flask"></i></div><div class="tech-text"><h4>Evidence-Based</h4><p>Aligned with global best practices in child physical assessment</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-dna"></i></div><div class="tech-text"><h4>Biological Relevance</h4><p>Tests selected for age-appropriateness and predictive value</p></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="section-header"><h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2><p class="section-subtitle">Let's build the future of sports together</p></div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-card"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-details"><h4>Email</h4><p>durgesh@peakathletics.in</p></div></div>
+                        <div class="contact-card"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-details"><h4>Phone</h4><p>+91 91427 83928</p></div></div>
+                        <div class="contact-card"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-details"><h4>Address</h4><p>3rd floor, Shanta Building, 301, 18th June Rd, 91Springboard, Santa Inez, Panaji, Goa 403001</p></div></div>
+                        <div class="demo-card"><h4>Schedule a Demo</h4><p>See the platform in action with a personalized demo</p><a href="#" class="btn btn-primary"><i class="fas fa-calendar-alt"></i><span>Book Demo</span></a></div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Request Information</h3>
+                        <form id="contactForm">
+                            <div class="form-group"><input type="text" id="name" placeholder="Your Name" required></div>
+                            <div class="form-group"><input type="email" id="email" placeholder="School Email" required></div>
+                            <div class="form-group"><input type="text" id="school" placeholder="School Name" required></div>
+                            <div class="form-group"><select id="students" required><option value="" disabled selected>Number of Students</option><option value="<500">Less than 500</option><option value="500-1000">500 - 1000</option><option value="1000-2000">1000 - 2000</option><option value=">2000">More than 2000</option></select></div>
+                            <div class="form-group"><textarea id="message" rows="4" placeholder="How can we help your school?" required></textarea></div>
+                            <button type="submit" class="btn btn-primary"><span>Send Request</span><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon"><i class="fas fa-chart-line"></i></div><span>PEAK</span>ATHLETE</a><p class="footer-tagline">Turning school sports into data-driven physical development</p></div>
+                <div class="footer-links">
+                    <div class="link-column"><h5>Platform</h5><a href="#solution">Features</a><a href="#impact">Impact</a><a href="#traction">Case Studies</a><a href="#contact">Pricing</a></div>
+                    <div class="link-column"><h5>Resources</h5><a href="#">NEP 2020 Alignment</a><a href="#">Sports Policy Guide</a><a href="#">Research Papers</a><a href="#">Blog</a></div>
+                    <div class="link-column"><h5>Company</h5><a href="#">About Us</a><a href="#contact">Contact</a><a href="#">Careers</a><a href="#">Privacy Policy</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom"><div class="copyright"><p>&copy; <span id="currentYear">2024</span> Peak Athlete. All rights reserved.</p></div><div class="social-links"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
+        </div>
+    </footer>
+
+    <!-- INLINE SCRIPT (combined and cleaned) -->
+    <script>
+        (function() {
+            document.addEventListener('DOMContentLoaded', function() {
+                initNavigation();
+                initStatsCounter();
+                initMockupTabs();
+                initImpactTabs();
+                initContactForm();
+                initSmoothScroll();
+                initCurrentYear();
+                initDemoScheduling();
+                console.log('Peak Athlete School Platform loaded successfully! 🏫');
+            });
+
+            // Utility
+            function debounce(func, wait) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), wait); }; }
+
+            // Navigation
+            function initNavigation() {
+                const menuToggle = document.getElementById('menuToggle');
+                const navMenu = document.getElementById('navMenu');
+                const hamburger = document.querySelector('.hamburger');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const navbar = document.querySelector('.navbar');
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+                });
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        hamburger.classList.remove('active');
+                        document.body.style.overflow = '';
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                const handleScroll = debounce(function() {
+                    if (window.scrollY > 50) navbar.classList.add('scrolled');
+                    else navbar.classList.remove('scrolled');
+                    updateActiveNavLink();
+                }, 16);
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                function updateActiveNavLink() {
+                    const sections = document.querySelectorAll('section[id]');
+                    const scrollPos = window.scrollY + 100;
+                    sections.forEach(section => {
+                        const top = section.offsetTop, height = section.offsetHeight, id = section.getAttribute('id');
+                        if (scrollPos >= top && scrollPos < top + height) {
+                            navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + id) link.classList.add('active'); });
+                        }
+                    });
+                }
+            }
+
+            // Stats Counter
+            function initStatsCounter() {
+                const stats = document.querySelectorAll('.stat-number[data-count], .metric-number[data-count]');
+                if (!stats.length) return;
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const target = parseInt(el.getAttribute('data-count'));
+                            animateNumber(el, target);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.5, rootMargin: '0px 0px -50px 0px' });
+                stats.forEach(stat => observer.observe(stat));
+            }
+            function animateNumber(el, target, duration = 2000) {
+                const start = performance.now();
+                function update(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 4);
+                    el.textContent = Math.floor(0 + (target - 0) * ease);
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            }
+
+            // Mockup Tabs
+            function initMockupTabs() {
+                const tabs = document.querySelectorAll('.mockup-tabs .tab');
+                const cards = document.querySelectorAll('.insight-card');
+                if (!tabs.length) return;
+                tabs.forEach((tab, idx) => {
+                    tab.addEventListener('click', function() {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        cards.forEach((card, i) => {
+                            if (i === idx) setTimeout(() => card.classList.add('active'), 150);
+                            else card.classList.remove('active');
+                        });
+                    });
+                });
+            }
+
+            // Impact Tabs
+            function initImpactTabs() {
+                const btns = document.querySelectorAll('.impact-tab-btn');
+                const contents = document.querySelectorAll('.impact-tab-content');
+                btns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const tabId = this.getAttribute('data-tab');
+                        btns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        contents.forEach(c => {
+                            c.classList.remove('active');
+                            if (c.id === tabId + '-tab') setTimeout(() => c.classList.add('active'), 150);
+                        });
+                    });
+                });
+            }
+
+            // Contact Form
+            function initContactForm() {
+                const form = document.getElementById('contactForm');
+                if (!form) return;
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const school = document.getElementById('school').value.trim();
+                    const students = document.getElementById('students').value;
+                    const message = document.getElementById('message').value.trim();
+                    if (!name || !email || !school || !students || !message) {
+                        showNotification('Please fill all fields.', 'error'); return;
+                    }
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        showNotification('Valid email required.', 'error'); return;
+                    }
+                    const btn = form.querySelector('button[type="submit"]');
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>'; btn.disabled = true;
+                    setTimeout(() => {
+                        showNotification('Thank you! Our team will contact you within 24 hours.', 'success');
+                        form.reset();
+                        btn.innerHTML = orig; btn.disabled = false;
+                    }, 1500);
+                });
+            }
+
+            // Smooth Scroll
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href === '#' || href === '#!') return;
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (!target) return;
+                        const header = document.querySelector('.navbar').offsetHeight;
+                        window.scrollTo({ top: target.offsetTop - header, behavior: 'smooth' });
+                    });
+                });
+            }
+
+            // Current Year
+            function initCurrentYear() {
+                const yr = document.getElementById('currentYear');
+                if (yr) yr.textContent = new Date().getFullYear();
+            }
+
+            // Demo Scheduling
+            function initDemoScheduling() {
+                document.querySelectorAll('[href*="demo"], [href*="schedule"]').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        if (this.getAttribute('href') === '#') { e.preventDefault(); showDemoModal(); }
+                    });
+                });
+            }
+
+            // Notification System
+            function showNotification(msg, type = 'info') {
+                const existing = document.querySelector('.notification');
+                if (existing) existing.remove();
+                const notif = document.createElement('div');
+                notif.className = `notification ${type}`;
+                notif.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle'}"></i><span>${msg}</span><button class="notification-close" aria-label="Close">&times;</button>`;
+                if (!document.querySelector('#notification-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-styles';
+                    style.textContent = `
+                        .notification{position:fixed;top:100px;right:20px;background:white;border-left:4px solid var(--primary);padding:var(--spacing-md) var(--spacing-lg);border-radius:var(--radius-md);display:flex;align-items:center;gap:var(--spacing-md);z-index:3000;box-shadow:var(--shadow-xl);animation:slideInRight 0.3s ease;max-width:400px;}
+                        .notification.success{border-left-color:var(--secondary);}
+                        .notification.error{border-left-color:#ef4444;}
+                        .notification.info{border-left-color:var(--accent);}
+                        .notification i{font-size:var(--font-size-xl);flex-shrink:0;}
+                        .notification.success i{color:var(--secondary);}
+                        .notification.error i{color:#ef4444;}
+                        .notification.info i{color:var(--accent);}
+                        .notification span{flex:1;color:var(--gray-800);}
+                        .notification-close{background:none;border:none;color:var(--gray-400);font-size:var(--font-size-xl);cursor:pointer;line-height:1;flex-shrink:0;}
+                        .notification-close:hover{color:var(--primary);}
+                        @keyframes slideInRight{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+                        @keyframes slideOutRight{from{transform:translateX(0);opacity:1;}to{transform:translateX(100%);opacity:0;}}
+                    `;
+                    document.head.appendChild(style);
+                }
+                document.body.appendChild(notif);
+                const auto = setTimeout(() => { notif.style.animation = 'slideOutRight 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 5000);
+                notif.querySelector('.notification-close').addEventListener('click', () => { clearTimeout(auto); notif.style.animation = 'slideOutRight 0.3s ease'; setTimeout(() => notif.remove(), 300); });
+            }
+            window.showNotification = showNotification;
+
+            // Demo Modal
+            function showDemoModal() {
+                const existing = document.querySelector('.modal-overlay');
+                if (existing) existing.remove();
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.setAttribute('role', 'dialog');
+                modal.innerHTML = `
+                    <div class="modal-content" style="background:white;border-radius:var(--radius-xl);max-width:500px;margin:10vh auto;padding:var(--spacing-2xl);position:relative;box-shadow:var(--shadow-2xl);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--spacing-lg);"><h3>Schedule a Demo</h3><button class="modal-close" style="background:none;border:none;font-size:2rem;cursor:pointer;">&times;</button></div>
+                        <div><p>Book a personalized demo to see how Peak Athlete can transform your school's physical education program.</p>
+                        <form id="demoForm">
+                            <div class="form-group"><input type="text" id="demo-name" placeholder="Your Name" required></div>
+                            <div class="form-group"><input type="email" id="demo-email" placeholder="Email Address" required></div>
+                            <div class="form-group"><input type="text" id="demo-school" placeholder="School Name" required></div>
+                            <div class="form-group"><input type="tel" id="demo-phone" placeholder="Phone Number" required></div>
+                            <div class="form-group"><select id="demo-date" required><option value="" disabled selected>Preferred Date</option><option value="today">Today</option><option value="tomorrow">Tomorrow</option><option value="this-week">This Week</option><option value="next-week">Next Week</option></select></div>
+                            <button type="submit" class="btn btn-primary"><span>Schedule Demo</span><i class="fas fa-calendar-check"></i></button>
+                        </form></div>
+                    </div>
+                `;
+                modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:3000;overflow-y:auto;';
+                document.body.appendChild(modal);
+                const close = modal.querySelector('.modal-close');
+                close.addEventListener('click', () => modal.remove());
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+                document.getElementById('demoForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('demo-name').value.trim();
+                    const email = document.getElementById('demo-email').value.trim();
+                    const school = document.getElementById('demo-school').value.trim();
+                    const phone = document.getElementById('demo-phone').value.trim();
+                    const date = document.getElementById('demo-date').value;
+                    if (!name || !email || !school || !phone || !date) { showNotification('Please fill all fields.', 'error'); return; }
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showNotification('Valid email required.', 'error'); return; }
+                    showNotification('Demo scheduled successfully! Our team will contact you to confirm the timing.', 'success');
+                    modal.remove();
+                });
+            }
+            window.showDemoModal = showDemoModal;
+        })();
+    </script>
+</body>
+</html>
