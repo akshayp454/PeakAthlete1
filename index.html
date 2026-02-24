@@ -24,17 +24,17 @@
     <meta property="twitter:description" content="Transforming school sports into data-driven physical development with AI-powered fitness assessment and talent identification platform.">
     <meta property="twitter:image" content="https://peakathlete.in/og-image.jpg">
 
-    <!-- Favicon (placeholder) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="#">
     <link rel="apple-touch-icon" href="#">
 
-    <!-- Font Awesome & Google Fonts (external for performance) -->
+    <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- INLINE STYLES (refactored and cleaned) -->
+    <!-- INLINE STYLES -->
     <style>
         /* ===== CSS RESET & BASE STYLES ===== */
         * {
@@ -78,6 +78,7 @@
             --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #ef4444 100%);
             --gradient-dark: linear-gradient(135deg, var(--dark) 0%, #2d3748 100%);
+            --gradient-surface: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             
             /* Typography */
             --font-primary: 'Inter', sans-serif;
@@ -117,6 +118,7 @@
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
             --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
             --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.3);
             
             /* Transitions */
             --transition-fast: 150ms ease;
@@ -135,6 +137,7 @@
             color: var(--gray-800);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -151,8 +154,8 @@
             line-height: 1.2;
             color: var(--dark);
         }
-        h1 { font-size: var(--font-size-5xl); }
-        h2 { font-size: var(--font-size-4xl); }
+        h1 { font-size: var(--font-size-5xl); letter-spacing: -0.02em; }
+        h2 { font-size: var(--font-size-4xl); letter-spacing: -0.01em; }
         h3 { font-size: var(--font-size-3xl); }
         h4 { font-size: var(--font-size-2xl); }
         h5 { font-size: var(--font-size-xl); }
@@ -166,6 +169,29 @@
             color: transparent;
             display: inline-block;
         }
+
+        /* ===== ANIMATION UTILITIES ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
 
         /* ===== ACCESSIBILITY ===== */
         .skip-link {
@@ -182,6 +208,10 @@
             transition: var(--transition-fast);
         }
         .skip-link:focus { top: 6px; }
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
 
         /* ===== NAVIGATION ===== */
         .navbar {
@@ -189,16 +219,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            border-bottom: 1px solid var(--gray-200);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             padding: var(--spacing-md) 0;
             transition: all var(--transition-base);
         }
         .navbar.scrolled {
             padding: var(--spacing-sm) 0;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
         }
         .nav-container {
             display: flex;
@@ -208,31 +239,31 @@
         .logo {
             display: flex;
             align-items: center;
-            font-size: var(--font-size-2xl);
-            font-weight: 800;
             text-decoration: none;
             color: var(--dark);
-            gap: var(--spacing-sm);
         }
-        .logo-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-md);
-            color: white;
-            font-size: var(--font-size-xl);
+        /* TEXT LOGO STYLING */
+        .logo-text {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
         }
-        .logo span { color: var(--primary); }
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* Mobile Menu Button */
         .menu-toggle {
             display: none;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1002;
+            background: transparent;
+            border: none;
+            padding: var(--spacing-xs);
         }
         .hamburger {
-            width: 30px;
+            width: 28px;
             height: 20px;
             display: flex;
             flex-direction: column;
@@ -246,9 +277,10 @@
             border-radius: var(--radius-full);
             transition: all var(--transition-base);
         }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); background: var(--primary); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(10px); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); background: var(--primary); }
+
         .nav-menu { display: flex; align-items: center; }
         .nav-list {
             display: flex;
@@ -277,6 +309,7 @@
             transition: width var(--transition-base);
         }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        
         .nav-cta {
             background: var(--gradient-primary);
             color: white;
@@ -284,8 +317,11 @@
             border-radius: var(--radius-full);
             text-decoration: none;
             font-weight: 600;
+            font-size: var(--font-size-sm);
             transition: all var(--transition-base);
             box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
         }
         .nav-cta:hover {
             transform: translateY(-2px);
@@ -306,12 +342,25 @@
             border: none;
             cursor: pointer;
             gap: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
         }
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
             box-shadow: var(--shadow-lg);
         }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            border-radius: var(--radius-full);
+        }
+        .btn-primary:hover::before { opacity: 1; }
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-xl);
@@ -329,28 +378,40 @@
 
         /* ===== HERO SECTION ===== */
         .hero {
-            padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+            padding: calc(var(--spacing-4xl) + 40px) 0 var(--spacing-3xl);
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
+        /* Background Decorations */
+        .hero-blob {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: 0;
+            animation: floatBlob 10s infinite ease-in-out alternate;
         }
+        .blob-1 { width: 400px; height: 400px; background: rgba(37,99,235,0.1); top: -100px; right: -100px; }
+        .blob-2 { width: 300px; height: 300px; background: rgba(16,185,129,0.1); bottom: 0; left: -50px; animation-delay: -5s; }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, -20px) scale(1.1); }
+        }
+
+        /* UPDATE: Hero Layout for Text Only */
         .hero .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-3xl);
-            align-items: center;
+            text-align: center;
+            max-width: 900px; /* Limit width for readability */
+            margin: 0 auto;
             position: relative;
             z-index: 1;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .hero-tag {
             display: inline-flex;
@@ -361,6 +422,7 @@
             font-size: var(--font-size-sm);
             font-weight: 600;
             margin-bottom: var(--spacing-xl);
+            border: 1px solid rgba(37,99,235,0.2);
         }
         .hero-title {
             font-size: var(--font-size-5xl);
@@ -371,16 +433,21 @@
             font-size: var(--font-size-xl);
             color: var(--gray-600);
             margin-bottom: var(--spacing-2xl);
-            max-width: 600px;
+            max-width: 700px; /* Slightly narrower for center text */
+            line-height: 1.7;
         }
         .hero-buttons {
             display: flex;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-2xl);
+            justify-content: center;
         }
         .hero-stats {
             display: flex;
             gap: var(--spacing-2xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--gray-200);
+            justify-content: center;
         }
         .stat-item { text-align: center; }
         .stat-number {
@@ -388,95 +455,21 @@
             font-weight: 800;
             color: var(--primary);
             margin-bottom: var(--spacing-xs);
+            line-height: 1;
         }
         .stat-label {
             font-size: var(--font-size-sm);
             color: var(--gray-500);
             font-weight: 500;
         }
-        .dashboard-preview {
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-2xl);
-            overflow: hidden;
-            border: 1px solid var(--gray-200);
-        }
-        .dashboard-header {
-            background: var(--gradient-dark);
-            color: white;
-            padding: var(--spacing-lg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .dashboard-metrics { display: flex; gap: var(--spacing-lg); }
-        .metric {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            font-size: var(--font-size-sm);
-            font-weight: 500;
-        }
-        .metric i { color: var(--accent); }
-        .dashboard-content { padding: var(--spacing-xl); }
-        .chart-placeholder {
-            height: 200px;
-            background: linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-            overflow: hidden;
-        }
-        .chart-placeholder::before {
-            content: '';
-            position: absolute;
-            top:0; left:0; width:100%; height:100%;
-            background: repeating-linear-gradient(90deg,transparent,transparent 20px,rgba(255,255,255,0.5) 20px,rgba(255,255,255,0.5) 40px);
-            animation: shimmer 2s infinite linear;
-        }
-        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .data-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
-        }
-        .data-item {
-            background: var(--gray-50);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--gray-200);
-        }
-        .data-label {
-            font-size: var(--font-size-sm);
-            color: var(--gray-500);
-            margin-bottom: var(--spacing-xs);
-        }
-        .data-value {
-            font-size: var(--font-size-3xl);
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: var(--spacing-xs);
-        }
-        .data-trend {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            font-size: var(--font-size-sm);
-            font-weight: 600;
-            padding: var(--spacing-xs) var(--spacing-md);
-            border-radius: var(--radius-full);
-        }
-        .data-trend.up { background: rgba(16,185,129,0.1); color: var(--secondary); }
 
         /* ===== SECTION COMMON ===== */
         section { padding: var(--spacing-4xl) 0; }
-        .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
+        .section-header { text-align: center; margin-bottom: var(--spacing-3xl); max-width: 800px; margin-left: auto; margin-right: auto; }
         .section-title { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-lg); }
         .section-subtitle {
             font-size: var(--font-size-xl);
             color: var(--gray-600);
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         /* ===== PROBLEM SECTION ===== */
@@ -489,10 +482,16 @@
         }
         .problem-card {
             background: white;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--gray-200);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-xl);
             padding: var(--spacing-xl);
+            transition: all var(--transition-base);
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
         .problem-icon {
             width:60px; height:60px;
@@ -508,32 +507,44 @@
         .mini-stat { text-align: center; flex:1; }
         .mini-value { font-size: var(--font-size-2xl); font-weight: 800; color:#dc2626; margin-bottom: var(--spacing-xs); }
         .mini-label { font-size: var(--font-size-sm); color: var(--gray-600); }
+        
         .challenges-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
             gap: var(--spacing-lg);
         }
         .challenge-card {
-            background: white; border-radius: var(--radius-lg); padding: var(--spacing-lg);
+            background: white; border-radius: var(--radius-lg); padding: var(--spacing-xl);
             border:1px solid var(--gray-200); transition: all var(--transition-base);
+            position: relative; overflow: hidden;
         }
+        .challenge-card:hover { border-color: var(--secondary); box-shadow: var(--shadow-md); }
         .challenge-card h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--dark); }
         .challenge-card p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
         .challenge-card.highlight { background: var(--gradient-primary); color: white; border:none; }
         .challenge-card.highlight h4, .challenge-card.highlight p { color: white; }
 
         /* ===== SOLUTION SECTION ===== */
-        .solution-section { background: white; }
+        .solution-section { background: white; position: relative; }
+        .solution-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 200px;
+            background: linear-gradient(to bottom, var(--gray-50), transparent); z-index: 0;
+        }
         .solution-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: var(--spacing-3xl);
             align-items: center;
+            position: relative; z-index: 1;
         }
         .features-list { margin-top: var(--spacing-xl); }
         .feature-item {
             display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            transition: background var(--transition-base);
         }
+        .feature-item:hover { background: var(--gray-50); }
         .feature-icon {
             width:50px; height:50px;
             background: linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
@@ -543,36 +554,43 @@
         }
         .feature-text h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-xs); color: var(--dark); }
         .feature-text p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+        
         .platform-mockup {
             background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-2xl);
             border:1px solid var(--gray-200); overflow: hidden;
         }
-        .mockup-tabs { display: flex; background: var(--gray-100); border-bottom:1px solid var(--gray-200); }
+        .mockup-tabs { display: flex; background: var(--gray-50); border-bottom:1px solid var(--gray-200); }
         .tab {
             flex:1; padding: var(--spacing-lg); text-align: center; font-weight: 600;
             color: var(--gray-500); cursor: pointer; transition: all var(--transition-base);
-            border-bottom:3px solid transparent;
+            border-bottom:3px solid transparent; position: relative;
         }
+        .tab:hover { color: var(--primary); background: rgba(37,99,235,0.05); }
         .tab.active { color: var(--primary); border-bottom-color: var(--primary); background: white; }
+        
         .mockup-content { padding: var(--spacing-2xl); min-height:400px; position: relative; }
         .insight-card {
             position: absolute; top: var(--spacing-2xl); left: var(--spacing-2xl); right: var(--spacing-2xl);
             opacity:0; visibility:hidden; transform: translateY(10px); transition: all var(--transition-base);
+            background: white;
         }
         .insight-card.active { opacity:1; visibility:visible; transform: translateY(0); }
         .insight-card h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); }
-        .insight-chart, .talent-radar, .integration-flow {
-            height:200px; background: linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);
+        
+        /* CSS Animation for tabs content placeholder */
+        .visual-shape {
+            height:200px; background: var(--gray-50);
             border-radius: var(--radius-lg); position: relative; overflow: hidden;
+            border: 2px dashed var(--gray-200);
         }
-        .insight-chart::before, .talent-radar::before, .integration-flow::before {
-            content:''; position:absolute; top:0; left:0; width:100%; height:100%;
-            background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.5) 20px,rgba(255,255,255,0.5) 40px);
-            animation: shimmer 2s infinite linear;
+        .visual-shape::after {
+            content: 'Live Preview'; position: absolute; top:50%; left:50%;
+            transform:translate(-50%, -50%); color: var(--gray-300);
+            font-weight: 700; font-size: var(--font-size-3xl); text-transform: uppercase;
         }
 
         /* ===== TIMING SECTION ===== */
-        .timing-section { background: white; }
+        .timing-section { background: var(--gray-50); }
         .timing-grid {
             display: grid;
             grid-template-columns: repeat(3,1fr);
@@ -582,7 +600,9 @@
             background: var(--gray-50); border-radius: var(--radius-xl); padding: var(--spacing-2xl);
             border:1px solid var(--gray-200); transition: all var(--transition-base);
         }
-        .timing-card.highlight { background: var(--gradient-primary); color: white; border:none; }
+        .timing-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); background: white; }
+        .timing-card.highlight { background: var(--gradient-primary); color: white; border:none; box-shadow: var(--shadow-xl); }
+        .timing-card.highlight:hover { transform: translateY(-5px); }
         .timing-card.highlight h3, .timing-card.highlight li { color: white; }
         .timing-icon {
             width:60px; height:60px; background: white; border-radius: var(--radius-lg);
@@ -607,7 +627,7 @@
         }
 
         /* ===== BUSINESS MODEL ===== */
-        .business-section { background: var(--gray-50); }
+        .business-section { background: white; }
         .business-model {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -617,7 +637,9 @@
         .model-card {
             background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
             box-shadow: var(--shadow-2xl); border:2px solid var(--primary); text-align: center;
+            transition: transform var(--transition-base);
         }
+        .model-card:hover { transform: translateY(-5px); }
         .model-header { margin-bottom: var(--spacing-2xl); }
         .model-icon {
             width:80px; height:80px; background: var(--gradient-primary);
@@ -648,7 +670,9 @@
         .extra-item {
             padding: var(--spacing-lg); background: var(--gray-50);
             border-radius: var(--radius-lg); border:1px solid var(--gray-200);
+            transition: all var(--transition-base);
         }
+        .extra-item:hover { border-color: var(--secondary); background: white; transform: translateY(-2px); }
         .extra-item h5 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); color: var(--dark); }
         .extra-item p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
 
@@ -658,8 +682,8 @@
             display: flex; justify-content: center; gap: var(--spacing-md); margin-bottom: var(--spacing-3xl); flex-wrap: wrap;
         }
         .impact-tab-btn {
-            padding: var(--spacing-md) var(--spacing-2xl); background: var(--gray-100);
-            border:1px solid var(--gray-300); border-radius: var(--radius-full); color: var(--gray-600);
+            padding: var(--spacing-md) var(--spacing-2xl); background: var(--gray-50);
+            border:1px solid var(--gray-200); border-radius: var(--radius-full); color: var(--gray-600);
             font-weight: 600; cursor: pointer; transition: all var(--transition-base);
         }
         .impact-tab-btn:hover, .impact-tab-btn.active {
@@ -667,7 +691,8 @@
         }
         .impact-tab-content { display: none; }
         .impact-tab-content.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+        
         .outcome-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
@@ -677,6 +702,7 @@
             background: var(--gray-50); border-radius: var(--radius-lg); padding: var(--spacing-xl);
             border:1px solid var(--gray-200); transition: all var(--transition-base);
         }
+        .outcome-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
         .outcome-icon {
             width:60px; height:60px; background: linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);
             border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
@@ -684,6 +710,7 @@
         }
         .outcome-card h4 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); color: var(--dark); }
         .outcome-card p { font-size: var(--font-size-sm); color: var(--gray-600); margin:0; }
+        
         .data-visibility {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -693,7 +720,7 @@
         .data-stats { display: grid; gap: var(--spacing-xl); }
         .data-stat {
             text-align: center; padding: var(--spacing-xl); background: var(--gradient-primary);
-            border-radius: var(--radius-xl); color: white;
+            border-radius: var(--radius-xl); color: white; box-shadow: var(--shadow-lg);
         }
         .data-stat .stat-number { font-size: var(--font-size-4xl); color: white; margin-bottom: var(--spacing-xs); }
         .data-stat .stat-label { color: rgba(255,255,255,0.9); font-size: var(--font-size-base); }
@@ -717,8 +744,10 @@
         .traction-metrics { display: grid; gap: var(--spacing-xl); }
         .traction-metric {
             background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
-            text-align: center; box-shadow: var(--shadow-lg); border:1px solid var(--gray-200);
+            text-align: center; box-shadow: var(--shadow-md); border:1px solid var(--gray-200);
+            transition: transform var(--transition-base);
         }
+        .traction-metric:hover { transform: translateY(-5px); }
         .metric-number {
             font-size: var(--font-size-5xl); font-weight: 800;
             background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text;
@@ -727,15 +756,15 @@
         .metric-label { font-size: var(--font-size-base); color: var(--gray-600); font-weight: 500; }
         .traction-testimonial {
             background: white; border-radius: var(--radius-xl); padding: var(--spacing-3xl);
-            box-shadow: var(--shadow-2xl); border:1px solid var(--gray-200); position: relative;
+            box-shadow: var(--shadow-xl); border:1px solid var(--gray-200); position: relative;
         }
         .quote-icon {
-            font-size: var(--font-size-6xl); color: var(--primary); opacity:0.2;
+            font-size: var(--font-size-6xl); color: var(--primary); opacity:0.15;
             position: absolute; top: var(--spacing-xl); left: var(--spacing-xl);
         }
         .testimonial-text {
             font-size: var(--font-size-lg); line-height:1.8; color: var(--gray-700);
-            margin-bottom: var(--spacing-2xl); position: relative; z-index:1;
+            margin-bottom: var(--spacing-2xl); position: relative; z-index:1; font-style: italic;
         }
         .testimonial-author { display: flex; align-items: center; gap: var(--spacing-lg); }
         .author-avatar {
@@ -750,7 +779,7 @@
             padding: var(--spacing-md) var(--spacing-xl); background: white; border-radius: var(--radius-lg);
             border:1px solid var(--gray-200); font-weight: 600; color: var(--gray-700); transition: all var(--transition-base);
         }
-        .logo-item:hover { border-color: var(--primary); color: var(--primary); box-shadow: var(--shadow-md); }
+        .logo-item:hover { border-color: var(--primary); color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
         /* ===== GTM SECTION ===== */
         .gtm-section { background: white; }
@@ -764,11 +793,14 @@
             width:100px; height:100px; background: white; border:4px solid var(--primary);
             border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;
             font-size: var(--font-size-3xl); font-weight: 800; color: var(--primary); flex-shrink:0; z-index:1;
+            box-shadow: var(--shadow-lg);
         }
         .phase-content {
             flex:1; background: var(--gray-50); border-radius: var(--radius-xl);
             padding: var(--spacing-2xl); border:1px solid var(--gray-200);
+            transition: all var(--transition-base);
         }
+        .phase-content:hover { border-color: var(--primary); box-shadow: var(--shadow-md); background: white; }
         .phase-content h3 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); color: var(--dark); }
         .phase-target { font-size: var(--font-size-lg); font-weight:700; color: var(--primary); margin-bottom: var(--spacing-lg); }
         .phase-tasks { list-style: none; }
@@ -808,6 +840,7 @@
             padding: var(--spacing-xl); background: var(--gray-50); border-radius: var(--radius-xl);
             border:1px solid var(--gray-200); transition: all var(--transition-base);
         }
+        .contact-card:hover { border-color: var(--primary); background: white; box-shadow: var(--shadow-md); }
         .contact-icon {
             width:50px; height:50px; background: var(--gradient-primary);
             border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
@@ -817,12 +850,13 @@
         .contact-details p { font-size: var(--font-size-base); color: var(--gray-600); margin:0; }
         .demo-card {
             background: var(--gradient-primary); border-radius: var(--radius-xl); padding: var(--spacing-2xl); color: white;
+            box-shadow: var(--shadow-xl);
         }
         .demo-card h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); color: white; }
         .demo-card p { font-size: var(--font-size-base); color: rgba(255,255,255,0.9); margin-bottom: var(--spacing-lg); }
         .contact-form {
-            background: var(--gray-50); border-radius: var(--radius-xl); padding: var(--spacing-2xl);
-            border:1px solid var(--gray-200);
+            background: white; border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            border:1px solid var(--gray-200); box-shadow: var(--shadow-xl);
         }
         .contact-form h3 { font-size: var(--font-size-2xl); margin-bottom: var(--spacing-xl); color: var(--dark); }
         .form-group { margin-bottom: var(--spacing-lg); }
@@ -830,10 +864,11 @@
             width:100%; padding: var(--spacing-md) var(--spacing-lg);
             border:1px solid var(--gray-300); border-radius: var(--radius-lg);
             font-family: var(--font-primary); font-size: var(--font-size-base); color: var(--gray-800);
-            transition: all var(--transition-base);
+            transition: all var(--transition-base); background: var(--gray-50);
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline:none; border-color: var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+            background: white;
         }
         .form-group textarea { resize: vertical; min-height:120px; }
 
@@ -848,6 +883,9 @@
             margin-bottom: var(--spacing-3xl);
         }
         .footer-brand .logo { color: white; margin-bottom: var(--spacing-lg); }
+        /* Footer Logo Text Styling */
+        .footer .logo span { color: var(--primary-light); }
+        
         .footer-tagline { font-size: var(--font-size-lg); color: var(--gray-300); margin:0; }
         .footer-links {
             display: grid;
@@ -873,11 +911,68 @@
         }
         .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
 
+        /* ===== SCROLL TO TOP BUTTON ===== */
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--primary); color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-xl); z-index: 900;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transform: translateY(20px); transition: all var(--transition-base);
+        }
+        .scroll-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .scroll-top:hover { background: var(--primary-dark); transform: translateY(-3px); }
+
+        /* ===== NOTIFICATION TOAST ===== */
+        .notification {
+            position: fixed; top: 100px; right: 20px; background: white;
+            border-left: 4px solid var(--primary); padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md); display: flex; align-items: center; gap: var(--spacing-md);
+            z-index: 3000; box-shadow: var(--shadow-2xl); transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+        }
+        .notification.show { transform: translateX(0); }
+        .notification.success { border-left-color: var(--secondary); }
+        .notification.error { border-left-color: #ef4444; }
+        .notification.info { border-left-color: var(--accent); }
+        .notification i { font-size: var(--font-size-xl); flex-shrink: 0; }
+        .notification.success i { color: var(--secondary); }
+        .notification.error i { color: #ef4444; }
+        .notification.info i { color: var(--accent); }
+        .notification-content { flex: 1; }
+        .notification-content h6 { font-size: var(--font-size-base); color: var(--dark); margin: 0; }
+        .notification-content p { font-size: var(--font-size-sm); color: var(--gray-600); margin: 0; }
+        .notification-close { background: none; border: none; color: var(--gray-400); font-size: var(--font-size-xl); cursor: pointer; line-height: 1; flex-shrink: 0; transition: color 0.2s; }
+        .notification-close:hover { color: var(--dark); }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            z-index: 3000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal {
+            background: white; width: 90%; max-width: 500px;
+            border-radius: var(--radius-xl); padding: var(--spacing-2xl);
+            position: relative; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-2xl);
+        }
+        .modal-overlay.active .modal { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: var(--spacing-lg); right: var(--spacing-lg);
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-500);
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--dark); }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             :root { --font-size-5xl:2.5rem; --font-size-6xl:3rem; --font-size-4xl:2rem; }
-            .hero .container, .solution-grid, .market-projection, .traction-grid, .contact-grid { grid-template-columns:1fr; }
-            .hero-visual { order:-1; }
+            .solution-grid, .market-projection, .traction-grid, .contact-grid { grid-template-columns:1fr; }
             .problem-grid, .timing-grid, .tech-grid, .footer-links { grid-template-columns:repeat(2,1fr); }
             .business-model { grid-template-columns:1fr; }
             .data-visibility { grid-template-columns:1fr; }
@@ -888,13 +983,14 @@
             section { padding:var(--spacing-3xl) 0; }
             .menu-toggle { display:block; }
             .nav-menu {
-                position: fixed; top:80px; right:-100%; width:300px; height:calc(100vh - 80px);
+                position: fixed; top:0; right:-100%; width:80%; max-width: 300px; height:100vh;
                 background: white; padding:var(--spacing-2xl); transition: right var(--transition-base);
-                box-shadow: var(--shadow-2xl); overflow-y:auto;
+                box-shadow: var(--shadow-2xl); overflow-y:auto; z-index: 1001;
             }
             .nav-menu.active { right:0; }
             .nav-list { flex-direction: column; align-items:flex-start; gap:var(--spacing-md); }
             .hero-buttons { flex-direction: column; gap:var(--spacing-md); }
+            .hero-buttons .btn { width: 100%; }
             .hero-stats { flex-direction: column; gap:var(--spacing-lg); }
             .problem-grid, .timing-grid, .tech-grid, .extra-grid { grid-template-columns:1fr; }
             .gtm-timeline::before { left:30px; }
@@ -907,36 +1003,70 @@
             :root { --font-size-5xl:2rem; --font-size-6xl:2.25rem; --font-size-4xl:1.5rem; }
             .challenges-grid, .outcome-grid, .partnership-logos { grid-template-columns:1fr; }
             .hero-title { font-size:var(--font-size-4xl); }
-            .dashboard-header { flex-direction: column; gap:var(--spacing-md); text-align:center; }
             .impact-tab-header { flex-direction: column; }
             .impact-tab-btn { width:100%; text-align:center; }
         }
-
-        /* Animation classes */
-        .fade-in { animation: fadeInUp 0.6s ease forwards; }
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     </style>
 </head>
 <body>
+    <!-- Notification Toast Container -->
+    <div id="notification-container"></div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="demoModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeDemoModal()">&times;</button>
+            <div class="section-header" style="text-align: left; margin-bottom: var(--spacing-xl);">
+                <h3 style="font-size: var(--font-size-2xl);">Schedule a Demo</h3>
+                <p style="margin:0; color: var(--gray-600);">See the platform in action with a personalized demo.</p>
+            </div>
+            <form id="demoForm" onsubmit="handleDemoSubmit(event)">
+                <div class="form-group">
+                    <input type="text" id="demo-name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="demo-email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="demo-school" placeholder="School Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="demo-phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select id="demo-date" required>
+                        <option value="" disabled selected>Preferred Date</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="this-week">This Week</option>
+                        <option value="next-week">Next Week</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span>Schedule Demo</span><i class="fas fa-calendar-check"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo" aria-label="Peak Athlete - Home">
-                <div class="logo-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
-                <span>PEAK</span>ATHLETE
+                <!-- TEXT LOGO ONLY -->
+                <div class="logo-text">PEAK<span>ATHLETE</span></div>
             </a>
-            <div class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" role="button">
-                <div class="hamburger" aria-hidden="true"><span></span><span></span><span></span></div>
-            </div>
-            <nav class="nav-menu" id="navMenu" role="navigation" aria-label="Main navigation">
-                <ul class="nav-list" role="menubar">
-                    <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
-                    <li role="none"><a href="#problem" class="nav-link" role="menuitem">The Problem</a></li>
-                    <li role="none"><a href="#solution" class="nav-link" role="menuitem">Solution</a></li>
-                    <li role="none"><a href="#market" class="nav-link" role="menuitem">Market</a></li>
-                    <li role="none"><a href="#impact" class="nav-link" role="menuitem">Impact</a></li>
-                    <li role="none"><a href="#traction" class="nav-link" role="menuitem">Traction</a></li>
-                    <li role="none"><a href="#contact" class="nav-cta" role="menuitem">Get Demo</a></li>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                <div class="hamburger"><span></span><span></span><span></span></div>
+            </button>
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#problem" class="nav-link">Problem</a></li>
+                    <li><a href="#solution" class="nav-link">Solution</a></li>
+                    <li><a href="#market" class="nav-link">Market</a></li>
+                    <li><a href="#impact" class="nav-link">Impact</a></li>
+                    <li><a href="#contact" class="nav-cta" onclick="openDemoModal(); return false;">Get Demo</a></li>
                 </ul>
             </nav>
         </div>
@@ -946,55 +1076,69 @@
 
     <main id="main-content">
         <!-- Hero Section -->
-        <section class="hero" id="home" role="banner">
+        <section class="hero" id="home">
+            <div class="hero-blob blob-1"></div>
+            <div class="hero-blob blob-2"></div>
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-tag"><span>NEP 2020 Aligned</span></div>
+                <div class="hero-content reveal active">
+                    <div class="hero-tag">NEP 2020 Aligned Platform</div>
                     <h1 class="hero-title">Turning school sports into <span class="gradient-text">data-driven</span> physical development</h1>
-                    <p class="hero-subtitle">A sports-science and AI-driven platform for school fitness assessment and talent identification</p>
+                    <p class="hero-subtitle">A sports-science and AI-driven platform for school fitness assessment and talent identification. Unlock the potential of every student.</p>
                     <div class="hero-buttons">
-                        <a href="#solution" class="btn btn-primary"><span>See Platform Demo</span><i class="fas fa-arrow-right"></i></a>
-                        <a href="#contact" class="btn btn-secondary"><i class="fas fa-calendar"></i><span>Schedule Meeting</span></a>
+                        <a href="#solution" class="btn btn-primary"><span>See How It Works</span><i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn btn-secondary" onclick="openDemoModal(); return false;"><i class="fas fa-calendar"></i><span>Book Demo</span></a>
                     </div>
                     <div class="hero-stats">
-                        <div class="stat-item"><div class="stat-number" data-count="4000">0</div><div class="stat-label">Students Assessed</div></div>
+                        <div class="stat-item"><div class="stat-number" data-count="1500">0</div><div class="stat-label">Students Assessed</div></div>
                         <div class="stat-item"><div class="stat-number" data-count="5">0</div><div class="stat-label">Partner Schools</div></div>
                         <div class="stat-item"><div class="stat-number" data-count="99">0</div><div class="stat-label">Satisfaction Rate</div></div>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="dashboard-preview">
-                        <div class="dashboard-header"><div class="dashboard-school">Assam Public School - Dashboard</div><div class="dashboard-metrics"><span class="metric"><i class="fas fa-running"></i> PPS: 87</span><span class="metric"><i class="fas fa-chart-bar"></i> APR: 92</span></div></div>
-                        <div class="dashboard-content">
-                            <div class="chart-placeholder"></div>
-                            <div class="data-grid">
-                                <div class="data-item"><div class="data-label">Physical Fitness Score</div><div class="data-value">85%</div><div class="data-trend up">+12%</div></div>
-                                <div class="data-item"><div class="data-label">Talent Identification</div><div class="data-value">78%</div><div class="data-trend up">+18%</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- GRAPH REMOVED -->
             </div>
         </section>
 
         <!-- Problem Section -->
-        <section class="problem-section" id="problem" aria-labelledby="problem-title">
+        <section class="problem-section" id="problem">
             <div class="container">
-                <div class="section-header">
-                    <h2 id="problem-title" class="section-title">The <span class="gradient-text">Problem</span></h2>
+                <div class="section-header reveal">
+                    <h2 class="section-title">The <span class="gradient-text">Problem</span></h2>
                     <p class="section-subtitle">Current state of school sports and physical education in India</p>
                 </div>
                 <div class="problem-grid">
-                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-users-slash"></i></div><div class="problem-content"><h3>Limited Participation</h3><div class="problem-stat">6%</div><p>of India's population regularly participates in sports</p></div></div>
-                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-child"></i></div><div class="problem-content"><h3>Low Fitness Levels</h3><div class="problem-stat">1%</div><p>Children are Athletic/Sports Fit</p></div></div>
-                    <div class="problem-card"><div class="problem-icon"><i class="fas fa-school"></i></div><div class="problem-content"><h3>Infrastructure Gaps</h3><div class="problem-stats"><div class="mini-stat"><div class="mini-value">23%</div><div class="mini-label">No playground</div></div><div class="mini-stat"><div class="mini-value">30%</div><div class="mini-label">No PE teachers</div></div></div></div></div>
+                    <div class="problem-card reveal stagger-1">
+                        <div class="problem-icon"><i class="fas fa-users-slash"></i></div>
+                        <div class="problem-content">
+                            <h3>Limited Participation</h3>
+                            <div class="problem-stat" data-count="6">0%</div>
+                            <p>of India's population regularly participates in sports</p>
+                        </div>
+                    </div>
+                    <div class="problem-card reveal stagger-2">
+                        <div class="problem-icon"><i class="fas fa-child"></i></div>
+                        <div class="problem-content">
+                            <h3>Low Fitness Levels</h3>
+                            <div class="problem-stat" data-count="1">0%</div>
+                            <p>Children are Athletic/Sports Fit</p>
+                        </div>
+                    </div>
+                    <div class="problem-card reveal stagger-3">
+                        <div class="problem-icon"><i class="fas fa-school"></i></div>
+                        <div class="problem-content">
+                            <h3>Infrastructure Gaps</h3>
+                            <div class="problem-stats">
+                                <div class="mini-stat"><div class="mini-value" data-count="23">0%</div><div class="mini-label">No playground</div></div>
+                                <div class="mini-stat"><div class="mini-value" data-count="30">0%</div><div class="mini-label">No PE teachers</div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="challenges-grid">
-                    <div class="challenge-card"><h4>No Standard Assessments</h4><p>No standard assessments for physical development and talent identification</p></div>
-                    <div class="challenge-card"><h4>Subjective PE Periods</h4><p>Subjective PE periods with no measurable outcomes or progress tracking</p></div>
-                    <div class="challenge-card"><h4>Missed Opportunities</h4><p>No systematic talent identification leading to missed opportunities</p></div>
-                    <div class="challenge-card"><h4>Fragmented Efforts</h4><p>Limited ecosystem collaboration results from fragmented efforts</p></div>
-                    <div class="challenge-card highlight"><h4>62% Youth Interest</h4><p>62% youth showing interest in sports but lack infrastructure and resources</p></div>
+                    <div class="challenge-card reveal"><h4>No Standard Assessments</h4><p>No standard assessments for physical development and talent identification</p></div>
+                    <div class="challenge-card reveal"><h4>Subjective PE Periods</h4><p>Subjective PE periods with no measurable outcomes or progress tracking</p></div>
+                    <div class="challenge-card reveal"><h4>Missed Opportunities</h4><p>No systematic talent identification leading to missed opportunities</p></div>
+                    <div class="challenge-card reveal"><h4>Fragmented Efforts</h4><p>Limited ecosystem collaboration results from fragmented efforts</p></div>
+                    <div class="challenge-card highlight reveal"><h4>62% Youth Interest</h4><p>62% youth showing interest in sports but lack infrastructure and resources</p></div>
                 </div>
             </div>
         </section>
@@ -1002,14 +1146,14 @@
         <!-- Solution Section -->
         <section class="solution-section" id="solution">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <h2 class="section-title">Solution: <span class="gradient-text">Peak Athlete</span></h2>
                     <p class="section-subtitle">Transforming school sports into data-driven physical development</p>
                 </div>
                 <div class="solution-grid">
-                    <div class="solution-content">
-                        <h3>Peak Athlete Platform</h3>
-                        <p>A sports-science and AI-driven platform for school fitness assessment and talent identification</p>
+                    <div class="solution-content reveal-left">
+                        <h3 style="margin-bottom: var(--spacing-lg);">Peak Athlete Platform</h3>
+                        <p style="margin-bottom: var(--spacing-xl);">A sports-science and AI-driven platform for school fitness assessment and talent identification.</p>
                         <div class="features-list">
                             <div class="feature-item"><div class="feature-icon"><i class="fas fa-clipboard-check"></i></div><div class="feature-text"><h4>Structured Assessments</h4><p>Scientific metrics for comprehensive physical evaluation</p></div></div>
                             <div class="feature-item"><div class="feature-icon"><i class="fas fa-brain"></i></div><div class="feature-text"><h4>AI/ML Scoring System</h4><p>Generates PPS & APR scores for accurate performance tracking</p></div></div>
@@ -1018,13 +1162,29 @@
                             <div class="feature-item"><div class="feature-icon"><i class="fas fa-user-cog"></i></div><div class="feature-text"><h4>Personalized Recommendations</h4><p>Sport recommendations based on physical attributes</p></div></div>
                         </div>
                     </div>
-                    <div class="solution-visual">
+                    <div class="solution-visual reveal">
                         <div class="platform-mockup">
-                            <div class="mockup-tabs"><div class="tab active">Data-Driven Insights</div><div class="tab">Talent Identification</div><div class="tab">School Integration</div></div>
+                            <div class="mockup-tabs">
+                                <div class="tab active" onclick="switchMockup(0)">Data Insights</div>
+                                <div class="tab" onclick="switchMockup(1)">Talent ID</div>
+                                <div class="tab" onclick="switchMockup(2)">Integration</div>
+                            </div>
                             <div class="mockup-content">
-                                <div class="insight-card active"><h4>Track Physical Development</h4><p>With scientific metrics and progress analytics</p><div class="insight-chart"></div></div>
-                                <div class="insight-card"><h4>Discover Hidden Potential</h4><p>Through intelligent analysis and pattern recognition</p><div class="talent-radar"></div></div>
-                                <div class="insight-card"><h4>Seamless Integration</h4><p>Aligns with NEP 2020 and school curriculum</p><div class="integration-flow"></div></div>
+                                <div class="insight-card active" id="mockup-0">
+                                    <h4>Track Physical Development</h4>
+                                    <p>With scientific metrics and progress analytics</p>
+                                    <div class="visual-shape"></div>
+                                </div>
+                                <div class="insight-card" id="mockup-1">
+                                    <h4>Discover Hidden Potential</h4>
+                                    <p>Through intelligent analysis and pattern recognition</p>
+                                    <div class="visual-shape"></div>
+                                </div>
+                                <div class="insight-card" id="mockup-2">
+                                    <h4>Seamless Integration</h4>
+                                    <p>Aligns with NEP 2020 and school curriculum</p>
+                                    <div class="visual-shape"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1032,17 +1192,44 @@
             </div>
         </section>
 
-        <!-- Market Opportunity (commented in original, kept as is) -->
-        <!-- <section class="market-section" id="market"> ... </section> -->
-
-        <!-- Why Now Section -->
-        <section class="timing-section">
+        <!-- Market Opportunity -->
+        <section class="market-section" id="market">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Why <span class="gradient-text">Now</span></h2><p class="section-subtitle">Perfect convergence of policy, market readiness, and technology</p></div>
+                <div class="section-header reveal">
+                    <h2 class="section-title">Why <span class="gradient-text">Now</span></h2>
+                    <p class="section-subtitle">Perfect convergence of policy, market readiness, and technology</p>
+                </div>
                 <div class="timing-grid">
-                    <div class="timing-card"><div class="timing-icon"><i class="fas fa-file-alt"></i></div><h3>NEP 2020</h3><ul class="timing-list"><li>Emphasis on holistic development</li><li>Focus on experiential learning</li><li>Physical education as integral</li><li>Mandate for measurable outcomes</li></ul></div>
-                    <div class="timing-card"><div class="timing-icon"><i class="fas fa-flag"></i></div><h3>National Sports Policy 2025</h3><ul class="timing-list"><li>Grassroots talent identification</li><li>Sports in school curriculum</li><li>Scientific assessment pathways</li><li>Development tracking systems</li></ul></div>
-                    <div class="timing-card highlight"><div class="timing-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Goa: Perfect Launchpad</h3><div class="goa-features"><div class="goa-feature"><i class="fas fa-rupee-sign"></i><span>High per capita income</span></div><div class="goa-feature"><i class="fas fa-graduation-cap"></i><span>High literacy rate</span></div><div class="goa-feature"><i class="fas fa-running"></i><span>Strong sports ecosystem</span></div><div class="goa-feature"><i class="fas fa-hands-helping"></i><span>Government support</span></div></div></div>
+                    <div class="timing-card reveal">
+                        <div class="timing-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3>NEP 2020</h3>
+                        <ul class="timing-list">
+                            <li>Emphasis on holistic development</li>
+                            <li>Focus on experiential learning</li>
+                            <li>Physical education as integral</li>
+                            <li>Mandate for measurable outcomes</li>
+                        </ul>
+                    </div>
+                    <div class="timing-card reveal">
+                        <div class="timing-icon"><i class="fas fa-flag"></i></div>
+                        <h3>National Sports Policy 2025</h3>
+                        <ul class="timing-list">
+                            <li>Grassroots talent identification</li>
+                            <li>Sports in school curriculum</li>
+                            <li>Scientific assessment pathways</li>
+                            <li>Development tracking systems</li>
+                        </ul>
+                    </div>
+                    <div class="timing-card highlight reveal">
+                        <div class="timing-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Goa: Perfect Launchpad</h3>
+                        <div class="goa-features">
+                            <div class="goa-feature"><i class="fas fa-rupee-sign"></i><span>High per capita income</span></div>
+                            <div class="goa-feature"><i class="fas fa-graduation-cap"></i><span>High literacy rate</span></div>
+                            <div class="goa-feature"><i class="fas fa-running"></i><span>Strong sports ecosystem</span></div>
+                            <div class="goa-feature"><i class="fas fa-hands-helping"></i><span>Government support</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1050,9 +1237,9 @@
         <!-- Business Model -->
         <section class="business-section">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Business <span class="gradient-text">Model</span></h2><p class="section-subtitle">Sustainable revenue through school subscriptions</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Business <span class="gradient-text">Model</span></h2><p class="section-subtitle">Sustainable revenue through school subscriptions</p></div>
                 <div class="business-model">
-                    <div class="model-card">
+                    <div class="model-card reveal-left">
                         <div class="model-header"><div class="model-icon"><i class="fas fa-school"></i></div><h3>School Subscription</h3><div class="model-price"><span class="price">₹10</span><span class="period">/student/month</span></div></div>
                         <div class="model-features">
                             <div class="model-feature"><i class="fas fa-check"></i><span>SaaS platform access</span></div>
@@ -1061,9 +1248,9 @@
                             <div class="model-feature"><i class="fas fa-check"></i><span>Parent dashboard access</span></div>
                             <div class="model-feature"><i class="fas fa-check"></i><span>Quarterly reports</span></div>
                         </div>
-                        <a href="#contact" class="btn btn-primary">Get Quote</a>
+                        <a href="#" class="btn btn-primary" onclick="openDemoModal(); return false;">Get Quote</a>
                     </div>
-                    <div class="model-extra">
+                    <div class="model-extra reveal">
                         <h4>Additional Revenue Streams</h4>
                         <div class="extra-grid">
                             <div class="extra-item"><h5>Advanced Analytics</h5><p>Deep dive reports and insights</p></div>
@@ -1078,36 +1265,36 @@
         <!-- Impact Section -->
         <section class="impact-section" id="impact">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Impact & <span class="gradient-text">Outcomes</span></h2><p class="section-subtitle">Transforming physical education with measurable results</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Impact & <span class="gradient-text">Outcomes</span></h2><p class="section-subtitle">Transforming physical education with measurable results</p></div>
                 <div class="impact-tabs">
-                    <div class="impact-tab-header" role="tablist">
-                        <button class="impact-tab-btn active" data-tab="students" role="tab" aria-selected="true" aria-controls="students-tab" id="students-tab-btn">Student Development</button>
-                        <button class="impact-tab-btn" data-tab="schools" role="tab" aria-selected="false" aria-controls="schools-tab" id="schools-tab-btn">School Benefits</button>
-                        <button class="impact-tab-btn" data-tab="data" role="tab" aria-selected="false" aria-controls="data-tab" id="data-tab-btn">Data Visibility</button>
+                    <div class="impact-tab-header">
+                        <button class="impact-tab-btn active" onclick="switchImpact('students', this)">Student Development</button>
+                        <button class="impact-tab-btn" onclick="switchImpact('schools', this)">School Benefits</button>
+                        <button class="impact-tab-btn" onclick="switchImpact('data', this)">Data Visibility</button>
                     </div>
-                    <div class="impact-tab-content active" id="students-tab" role="tabpanel" aria-labelledby="students-tab-btn">
+                    <div class="impact-tab-content active" id="students-tab">
                         <div class="outcome-grid">
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-running"></i></div><h4>Enhanced Motor Skills</h4><p>Targeted tracking improves fundamental movement abilities</p></div>
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-route"></i></div><h4>Personalized Development</h4><p>Data-driven insights identify individual strengths</p></div>
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-search"></i></div><h4>Early Talent Identification</h4><p>Discover and nurture hidden athletic potential</p></div>
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-brain"></i></div><h4>Better Focus & Academic Synergy</h4><p>Physical wellness positively influences classroom performance</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-running"></i></div><h4>Enhanced Motor Skills</h4><p>Targeted tracking improves fundamental movement abilities</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-route"></i></div><h4>Personalized Development</h4><p>Data-driven insights identify individual strengths</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-search"></i></div><h4>Early Talent ID</h4><p>Discover and nurture hidden athletic potential</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-brain"></i></div><h4>Academic Synergy</h4><p>Physical wellness positively influences classroom performance</p></div>
                         </div>
                     </div>
-                    <div class="impact-tab-content" id="schools-tab" role="tabpanel" aria-labelledby="schools-tab-btn" hidden>
+                    <div class="impact-tab-content" id="schools-tab">
                         <div class="outcome-grid">
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-chalkboard-teacher"></i></div><h4>Empowering Teachers</h4><p>Simple digital tools for faster recording and data-backed insights</p></div>
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-trophy"></i></div><h4>Elevating Reputation</h4><p>Showcase commitment to holistic development</p></div>
-                            <div class="outcome-card"><div class="outcome-icon"><i class="fas fa-users"></i></div><h4>Enhanced Parent Engagement</h4><p>Transparent insights into child's physical progress</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-chalkboard-teacher"></i></div><h4>Empowering Teachers</h4><p>Simple digital tools for faster recording and data-backed insights</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-trophy"></i></div><h4>Elevating Reputation</h4><p>Showcase commitment to holistic development</p></div>
+                            <div class="outcome-card reveal"><div class="outcome-icon"><i class="fas fa-users"></i></div><h4>Parent Engagement</h4><p>Transparent insights into child's physical progress</p></div>
                         </div>
                     </div>
-                    <div class="impact-tab-content" id="data-tab" role="tabpanel" aria-labelledby="data-tab-btn" hidden>
+                    <div class="impact-tab-content" id="data-tab">
                         <div class="data-visibility">
-                            <div class="data-stats">
-                                <div class="data-stat"><div class="stat-number">4000+</div><div class="stat-label">Students Tracked</div></div>
+                            <div class="data-stats reveal">
+                                <div class="data-stat"><div class="stat-number">1500+</div><div class="stat-label">Students Tracked</div></div>
                                 <div class="data-stat"><div class="stat-number">5</div><div class="stat-label">Partner Schools</div></div>
                                 <div class="data-stat"><div class="stat-number">12+</div><div class="stat-label">Assessment Metrics</div></div>
                             </div>
-                            <div class="data-features"><h4>Comprehensive Fitness Profiles</h4><ul class="data-list"><li>Individual progress tracking</li><li>Class-level analytics</li><li>School-wide benchmarking</li><li>Gender and age-specific insights</li></ul></div>
+                            <div class="data-features reveal"><h4>Comprehensive Fitness Profiles</h4><ul class="data-list"><li>Individual progress tracking</li><li>Class-level analytics</li><li>School-wide benchmarking</li><li>Gender and age-specific insights</li></ul></div>
                         </div>
                     </div>
                 </div>
@@ -1117,31 +1304,36 @@
         <!-- Traction Section -->
         <section class="traction-section" id="traction">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Real-World <span class="gradient-text">Traction</span></h2><p class="section-subtitle">Impact and adoption of Peak Athlete platform</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Real-World <span class="gradient-text">Traction</span></h2><p class="section-subtitle">Impact and adoption of Peak Athlete platform</p></div>
                 <div class="traction-grid">
-                    <div class="traction-metrics">
-                        <div class="traction-metric"><div class="metric-number" data-count="4000">0</div><div class="metric-label">Students currently benefiting from our platform</div></div>
+                    <div class="traction-metrics reveal-left">
+                        <div class="traction-metric"><div class="metric-number" data-count="1500">0</div><div class="metric-label">Students currently benefiting from our platform</div></div>
                         <div class="traction-metric"><div class="metric-number" data-count="5">0</div><div class="metric-label">Partner schools across Goa</div></div>
                         <div class="traction-metric"><div class="metric-number" data-count="10">0+</div><div class="metric-label">Schools with confirmed interest</div></div>
                     </div>
-                    <div class="traction-testimonial">
+                    <div class="traction-testimonial reveal">
                         <div class="quote-icon">"</div>
                         <p class="testimonial-text">The platform is a game-changer for schools. For the first time, we have a structured, scientific way to track every child's physical development. The platform makes it incredibly easy for teachers to record assessments, and the reports it generates are professional, clear, and data-backed. Parents love being able to see their child's wellness journey, while students are motivated by the leaderboards and personalized sport recommendations. More importantly, it aligns perfectly with NEP 2020 and holistic education goals.</p>
                         <div class="testimonial-author"><div class="author-avatar">P</div><div class="author-info"><div class="author-name">Principal</div><div class="author-school">Assam Public School</div></div></div>
                     </div>
                 </div>
-                <div class="partnership-logos"><div class="logo-item">NEP 2020</div><div class="logo-item">National Sports Policy</div><div class="logo-item">ASSOCHAM Goa</div><div class="logo-item">State Education Bodies</div></div>
+                <div class="partnership-logos reveal">
+                    <div class="logo-item">NEP 2020</div>
+                    <div class="logo-item">National Sports Policy</div>
+                    <div class="logo-item">ASSOCHAM Goa</div>
+                    <div class="logo-item">State Education Bodies</div>
+                </div>
             </div>
         </section>
 
         <!-- GTM Strategy -->
-        <!--<section class="gtm-section">
+        <section class="gtm-section">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Go-To-Market <span class="gradient-text">Strategy</span></h2><p class="section-subtitle">Strategic expansion from Goa to South India</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Go-To-Market <span class="gradient-text">Strategy</span></h2><p class="section-subtitle">Strategic expansion from Goa to South India</p></div>
                 <div class="gtm-timeline">
-                    <div class="timeline-phase"><div class="phase-number">Phase 1</div><div class="phase-content"><h3>Goa Establishment</h3><div class="phase-target">100+ schools</div><ul class="phase-tasks"><li>Establish strong foothold</li><li>Optimize product-market fit</li><li>Build case studies</li><li>Secure government partnerships</li></ul></div></div>
-                    <div class="timeline-phase"><div class="phase-number">Phase 2</div><div class="phase-content"><h3>South India Expansion</h3><div class="phase-target">Karnataka & Kerala</div><ul class="phase-tasks"><li>Leverage high sports adoption</li><li>Education board partnerships</li><li>Regional customization</li><li>Local team setup</li></ul></div></div>
-                    <div class="timeline-phase"><div class="phase-number">Phase 3</div><div class="phase-content"><h3>National Scale</h3><div class="phase-target">1000+ schools</div><ul class="phase-tasks"><li>Scale across India</li><li>Establish industry leadership</li><li>Partnerships with sports federations</li><li>CSR initiatives integration</li></ul></div></div>
+                    <div class="timeline-phase reveal"><div class="phase-number">Phase 1</div><div class="phase-content"><h3>Goa Establishment</h3><div class="phase-target">100+ schools</div><ul class="phase-tasks"><li>Establish strong foothold</li><li>Optimize product-market fit</li><li>Build case studies</li><li>Secure government partnerships</li></ul></div></div>
+                    <div class="timeline-phase reveal"><div class="phase-number">Phase 2</div><div class="phase-content"><h3>South India Expansion</h3><div class="phase-target">Karnataka & Kerala</div><ul class="phase-tasks"><li>Leverage high sports adoption</li><li>Education board partnerships</li><li>Regional customization</li><li>Local team setup</li></ul></div></div>
+                    <div class="timeline-phase reveal"><div class="phase-number">Phase 3</div><div class="phase-content"><h3>National Scale</h3><div class="phase-target">1000+ schools</div><ul class="phase-tasks"><li>Scale across India</li><li>Establish industry leadership</li><li>Partnerships with sports federations</li><li>CSR initiatives integration</li></ul></div></div>
                 </div>
             </div>
         </section>
@@ -1149,11 +1341,23 @@
         <!-- Technology Section -->
         <section class="tech-section">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Technology & <span class="gradient-text">Innovation</span></h2><p class="section-subtitle">AI/ML-powered platform built on scientific principles</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Technology & <span class="gradient-text">Innovation</span></h2><p class="section-subtitle">AI/ML-powered platform built on scientific principles</p></div>
                 <div class="tech-grid">
-                    <div class="tech-column"><h3>AI/ML Models</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-robot"></i></div><div class="tech-text"><h4>Performance Analysis</h4><p>Identifies patterns in physical development and predicts future potential</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-crystal-ball"></i></div><div class="tech-text"><h4>Predictive Modeling</h4><p>Forecasts athletic growth trajectories and sport alignment</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-brain"></i></div><div class="tech-text"><h4>Continuous Learning</h4><p>Algorithms improve with each assessment, increasing accuracy over time</p></div></div></div>
-                    <div class="tech-column"><h3>Data Normalization</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-balance-scale"></i></div><div class="tech-text"><h4>Age-Adjusted Scoring</h4><p>Benchmarks performance against age-specific standards</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-venus-mars"></i></div><div class="tech-text"><h4>Gender-Specific Metrics</h4><p>Accounts for physiological differences between male and female students</p></div></div></div>
-                    <div class="tech-column"><h3>Sports Science Framework</h3><div class="tech-feature"><div class="tech-icon"><i class="fas fa-flask"></i></div><div class="tech-text"><h4>Evidence-Based</h4><p>Aligned with global best practices in child physical assessment</p></div></div><div class="tech-feature"><div class="tech-icon"><i class="fas fa-dna"></i></div><div class="tech-text"><h4>Biological Relevance</h4><p>Tests selected for age-appropriateness and predictive value</p></div></div></div>
+                    <div class="tech-column reveal">
+                        <h3>AI/ML Models</h3>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-robot"></i></div><div class="tech-text"><h4>Performance Analysis</h4><p>Identifies patterns in physical development and predicts future potential</p></div></div>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-crystal-ball"></i></div><div class="tech-text"><h4>Predictive Modeling</h4><p>Forecasts athletic growth trajectories and sport alignment</p></div></div>
+                    </div>
+                    <div class="tech-column reveal">
+                        <h3>Data Normalization</h3>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-balance-scale"></i></div><div class="tech-text"><h4>Age-Adjusted Scoring</h4><p>Benchmarks performance against age-specific standards</p></div></div>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-venus-mars"></i></div><div class="tech-text"><h4>Gender-Specific Metrics</h4><p>Accounts for physiological differences between male and female students</p></div></div>
+                    </div>
+                    <div class="tech-column reveal">
+                        <h3>Sports Science Framework</h3>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-flask"></i></div><div class="tech-text"><h4>Evidence-Based</h4><p>Aligned with global best practices in child physical assessment</p></div></div>
+                        <div class="tech-feature"><div class="tech-icon"><i class="fas fa-dna"></i></div><div class="tech-text"><h4>Biological Relevance</h4><p>Tests selected for age-appropriateness and predictive value</p></div></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1161,15 +1365,15 @@
         <!-- Contact Section -->
         <section class="contact-section" id="contact">
             <div class="container">
-                <div class="section-header"><h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2><p class="section-subtitle">Let's build the future of sports together</p></div>
+                <div class="section-header reveal"><h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2><p class="section-subtitle">Let's build the future of sports together</p></div>
                 <div class="contact-grid">
-                    <div class="contact-info">
+                    <div class="contact-info reveal-left">
                         <div class="contact-card"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-details"><h4>Email</h4><p>durgesh@peakathletics.in</p></div></div>
                         <div class="contact-card"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-details"><h4>Phone</h4><p>+91 91427 83928</p></div></div>
                         <div class="contact-card"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-details"><h4>Address</h4><p>3rd floor, Shanta Building, 301, 18th June Rd, 91Springboard, Santa Inez, Panaji, Goa 403001</p></div></div>
-                        <div class="demo-card"><h4>Schedule a Demo</h4><p>See the platform in action with a personalized demo</p><a href="#" class="btn btn-primary"><i class="fas fa-calendar-alt"></i><span>Book Demo</span></a></div>
+                        <div class="demo-card"><h4>Schedule a Demo</h4><p>See the platform in action with a personalized demo</p><a href="#" class="btn" style="background:white; color:var(--primary);" onclick="openDemoModal(); return false;"><i class="fas fa-calendar-alt"></i><span>Book Demo</span></a></div>
                     </div>
-                    <div class="contact-form">
+                    <div class="contact-form reveal">
                         <h3>Request Information</h3>
                         <form id="contactForm">
                             <div class="form-group"><input type="text" id="name" placeholder="Your Name" required></div>
@@ -1186,10 +1390,13 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand"><a href="#" class="logo"><div class="logo-icon"><i class="fas fa-chart-line"></i></div><span>PEAK</span>ATHLETE</a><p class="footer-tagline">Turning school sports into data-driven physical development</p></div>
+                <div class="footer-brand"><a href="#" class="logo">
+                    <!-- FOOTER TEXT LOGO -->
+                    <div class="logo-text">PEAK<span>ATHLETE</span></div>
+                </a><p class="footer-tagline">Turning school sports into data-driven physical development</p></div>
                 <div class="footer-links">
                     <div class="link-column"><h5>Platform</h5><a href="#solution">Features</a><a href="#impact">Impact</a><a href="#traction">Case Studies</a><a href="#contact">Pricing</a></div>
                     <div class="link-column"><h5>Resources</h5><a href="#">NEP 2020 Alignment</a><a href="#">Sports Policy Guide</a><a href="#">Research Papers</a><a href="#">Blog</a></div>
@@ -1200,19 +1407,23 @@
         </div>
     </footer>
 
-    <!-- INLINE SCRIPT (combined and cleaned) -->
+    <!-- Scroll To Top Button -->
+    <div class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- INLINE SCRIPT -->
     <script>
         (function() {
             document.addEventListener('DOMContentLoaded', function() {
                 initNavigation();
                 initStatsCounter();
                 initMockupTabs();
-                initImpactTabs();
+                initScrollAnimations();
                 initContactForm();
-                initSmoothScroll();
                 initCurrentYear();
-                initDemoScheduling();
-                console.log('Peak Athlete School Platform loaded successfully! 🏫');
+                initScrollTop();
+                console.log('Peak Athlete Platform Initialized Successfully.');
             });
 
             // Utility
@@ -1224,12 +1435,14 @@
                 const navMenu = document.getElementById('navMenu');
                 const hamburger = document.querySelector('.hamburger');
                 const navLinks = document.querySelectorAll('.nav-link');
-                const navbar = document.querySelector('.navbar');
+                const navbar = document.getElementById('navbar');
+                
                 menuToggle.addEventListener('click', function() {
                     navMenu.classList.toggle('active');
                     hamburger.classList.toggle('active');
                     document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
                 });
+                
                 navLinks.forEach(link => {
                     link.addEventListener('click', function() {
                         navMenu.classList.remove('active');
@@ -1239,12 +1452,31 @@
                         this.classList.add('active');
                     });
                 });
-                const handleScroll = debounce(function() {
-                    if (window.scrollY > 50) navbar.classList.add('scrolled');
-                    else navbar.classList.remove('scrolled');
+                
+                // Scroll listener for Active Link Highlighting
+                window.addEventListener('scroll', debounce(function() {
                     updateActiveNavLink();
-                }, 16);
-                window.addEventListener('scroll', handleScroll, { passive: true });
+                }, 50));
+
+                // Optimized Navbar Shadow using IntersectionObserver
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navbar.classList.remove('scrolled');
+                        } else {
+                            navbar.classList.add('scrolled');
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '-80px 0px 0px 0px' }); // Offset by navbar height
+                
+                // Observe a sentinel element at the top of main
+                const sentinel = document.createElement('div');
+                sentinel.style.position = 'absolute';
+                sentinel.style.top = '0';
+                sentinel.style.height = '1px';
+                document.body.prepend(sentinel);
+                observer.observe(sentinel);
+                
                 function updateActiveNavLink() {
                     const sections = document.querySelectorAll('section[id]');
                     const scrollPos = window.scrollY + 100;
@@ -1259,107 +1491,109 @@
 
             // Stats Counter
             function initStatsCounter() {
-                const stats = document.querySelectorAll('.stat-number[data-count], .metric-number[data-count]');
-                if (!stats.length) return;
+                const stats = document.querySelectorAll('[data-count]');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const el = entry.target;
-                            const target = parseInt(el.getAttribute('data-count'));
-                            animateNumber(el, target);
+                            const target = parseFloat(el.getAttribute('data-count'));
+                            const isPercentage = el.textContent.includes('%');
+                            animateNumber(el, target, isPercentage);
                             observer.unobserve(el);
                         }
                     });
-                }, { threshold: 0.5, rootMargin: '0px 0px -50px 0px' });
+                }, { threshold: 0.5 });
                 stats.forEach(stat => observer.observe(stat));
             }
-            function animateNumber(el, target, duration = 2000) {
+
+            function animateNumber(el, target, isPercentage) {
+                const duration = 2000;
                 const start = performance.now();
                 function update(now) {
                     const progress = Math.min((now - start) / duration, 1);
                     const ease = 1 - Math.pow(1 - progress, 4);
-                    el.textContent = Math.floor(0 + (target - 0) * ease);
+                    el.textContent = Math.floor(target * ease) + (isPercentage ? '%' : '+');
                     if (progress < 1) requestAnimationFrame(update);
                 }
                 requestAnimationFrame(update);
             }
 
+            // Scroll Reveal Animation
+            function initScrollAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+                
+                document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
+            }
+
             // Mockup Tabs
             function initMockupTabs() {
-                const tabs = document.querySelectorAll('.mockup-tabs .tab');
-                const cards = document.querySelectorAll('.insight-card');
-                if (!tabs.length) return;
-                tabs.forEach((tab, idx) => {
-                    tab.addEventListener('click', function() {
-                        tabs.forEach(t => t.classList.remove('active'));
-                        this.classList.add('active');
-                        cards.forEach((card, i) => {
-                            if (i === idx) setTimeout(() => card.classList.add('active'), 150);
-                            else card.classList.remove('active');
-                        });
+                window.switchMockup = function(index) {
+                    const tabs = document.querySelectorAll('.mockup-tabs .tab');
+                    const cards = document.querySelectorAll('.insight-card');
+                    tabs.forEach((t, i) => {
+                        if (i === index) t.classList.add('active');
+                        else t.classList.remove('active');
                     });
-                });
+                    cards.forEach((c, i) => {
+                        if (i === index) setTimeout(() => c.classList.add('active'), 100);
+                        else c.classList.remove('active');
+                    });
+                };
             }
 
             // Impact Tabs
-            function initImpactTabs() {
+            window.switchImpact = function(tabId, btn) {
                 const btns = document.querySelectorAll('.impact-tab-btn');
                 const contents = document.querySelectorAll('.impact-tab-content');
-                btns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const tabId = this.getAttribute('data-tab');
-                        btns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        contents.forEach(c => {
-                            c.classList.remove('active');
-                            if (c.id === tabId + '-tab') setTimeout(() => c.classList.add('active'), 150);
-                        });
-                    });
-                });
-            }
+                
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                contents.forEach(c => c.classList.remove('active'));
+                document.getElementById(tabId + '-tab').classList.add('active');
+            };
 
             // Contact Form
             function initContactForm() {
                 const form = document.getElementById('contactForm');
                 if (!form) return;
+                
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    const name = document.getElementById('name').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const school = document.getElementById('school').value.trim();
-                    const students = document.getElementById('students').value;
-                    const message = document.getElementById('message').value.trim();
-                    if (!name || !email || !school || !students || !message) {
-                        showNotification('Please fill all fields.', 'error'); return;
-                    }
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        showNotification('Valid email required.', 'error'); return;
-                    }
-                    const btn = form.querySelector('button[type="submit"]');
+                    // Simulate API call
+                    const btn = form.querySelector('button');
                     const orig = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>'; btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>'; 
+                    btn.disabled = true;
+                    
                     setTimeout(() => {
-                        showNotification('Thank you! Our team will contact you within 24 hours.', 'success');
+                        showNotification('Thank you! Our team will contact you soon.', 'success');
                         form.reset();
-                        btn.innerHTML = orig; btn.disabled = false;
+                        btn.innerHTML = orig; 
+                        btn.disabled = false;
                     }, 1500);
                 });
             }
 
-            // Smooth Scroll
-            function initSmoothScroll() {
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
-                        const href = this.getAttribute('href');
-                        if (href === '#' || href === '#!') return;
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (!target) return;
-                        const header = document.querySelector('.navbar').offsetHeight;
-                        window.scrollTo({ top: target.offsetTop - header, behavior: 'smooth' });
-                    });
-                });
-            }
+            // Demo Modal Logic
+            window.openDemoModal = function() {
+                document.getElementById('demoModal').classList.add('active');
+            };
+            window.closeDemoModal = function() {
+                document.getElementById('demoModal').classList.remove('active');
+            };
+            window.handleDemoSubmit = function(e) {
+                e.preventDefault();
+                closeDemoModal();
+                setTimeout(() => showNotification('Demo request received! We will confirm the timing.', 'success'), 300);
+                e.target.reset();
+            };
 
             // Current Year
             function initCurrentYear() {
@@ -1367,88 +1601,52 @@
                 if (yr) yr.textContent = new Date().getFullYear();
             }
 
-            // Demo Scheduling
-            function initDemoScheduling() {
-                document.querySelectorAll('[href*="demo"], [href*="schedule"]').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        if (this.getAttribute('href') === '#') { e.preventDefault(); showDemoModal(); }
-                    });
-                });
+            // Scroll To Top
+            function initScrollTop() {
+                const btn = document.getElementById('scrollTopBtn');
+                window.addEventListener('scroll', debounce(() => {
+                    if(window.scrollY > 500) btn.classList.add('show');
+                    else btn.classList.remove('show');
+                }, 100));
             }
 
             // Notification System
-            function showNotification(msg, type = 'info') {
+            window.showNotification = function(msg, type = 'info') {
+                const container = document.getElementById('notification-container');
+                
+                // Remove existing
                 const existing = document.querySelector('.notification');
                 if (existing) existing.remove();
+                
                 const notif = document.createElement('div');
                 notif.className = `notification ${type}`;
-                notif.innerHTML = `<i class="fas fa-${type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle'}"></i><span>${msg}</span><button class="notification-close" aria-label="Close">&times;</button>`;
-                if (!document.querySelector('#notification-styles')) {
-                    const style = document.createElement('style');
-                    style.id = 'notification-styles';
-                    style.textContent = `
-                        .notification{position:fixed;top:100px;right:20px;background:white;border-left:4px solid var(--primary);padding:var(--spacing-md) var(--spacing-lg);border-radius:var(--radius-md);display:flex;align-items:center;gap:var(--spacing-md);z-index:3000;box-shadow:var(--shadow-xl);animation:slideInRight 0.3s ease;max-width:400px;}
-                        .notification.success{border-left-color:var(--secondary);}
-                        .notification.error{border-left-color:#ef4444;}
-                        .notification.info{border-left-color:var(--accent);}
-                        .notification i{font-size:var(--font-size-xl);flex-shrink:0;}
-                        .notification.success i{color:var(--secondary);}
-                        .notification.error i{color:#ef4444;}
-                        .notification.info i{color:var(--accent);}
-                        .notification span{flex:1;color:var(--gray-800);}
-                        .notification-close{background:none;border:none;color:var(--gray-400);font-size:var(--font-size-xl);cursor:pointer;line-height:1;flex-shrink:0;}
-                        .notification-close:hover{color:var(--primary);}
-                        @keyframes slideInRight{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
-                        @keyframes slideOutRight{from{transform:translateX(0);opacity:1;}to{transform:translateX(100%);opacity:0;}}
-                    `;
-                    document.head.appendChild(style);
-                }
-                document.body.appendChild(notif);
-                const auto = setTimeout(() => { notif.style.animation = 'slideOutRight 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 5000);
-                notif.querySelector('.notification-close').addEventListener('click', () => { clearTimeout(auto); notif.style.animation = 'slideOutRight 0.3s ease'; setTimeout(() => notif.remove(), 300); });
-            }
-            window.showNotification = showNotification;
-
-            // Demo Modal
-            function showDemoModal() {
-                const existing = document.querySelector('.modal-overlay');
-                if (existing) existing.remove();
-                const modal = document.createElement('div');
-                modal.className = 'modal-overlay';
-                modal.setAttribute('role', 'dialog');
-                modal.innerHTML = `
-                    <div class="modal-content" style="background:white;border-radius:var(--radius-xl);max-width:500px;margin:10vh auto;padding:var(--spacing-2xl);position:relative;box-shadow:var(--shadow-2xl);">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--spacing-lg);"><h3>Schedule a Demo</h3><button class="modal-close" style="background:none;border:none;font-size:2rem;cursor:pointer;">&times;</button></div>
-                        <div><p>Book a personalized demo to see how Peak Athlete can transform your school's physical education program.</p>
-                        <form id="demoForm">
-                            <div class="form-group"><input type="text" id="demo-name" placeholder="Your Name" required></div>
-                            <div class="form-group"><input type="email" id="demo-email" placeholder="Email Address" required></div>
-                            <div class="form-group"><input type="text" id="demo-school" placeholder="School Name" required></div>
-                            <div class="form-group"><input type="tel" id="demo-phone" placeholder="Phone Number" required></div>
-                            <div class="form-group"><select id="demo-date" required><option value="" disabled selected>Preferred Date</option><option value="today">Today</option><option value="tomorrow">Tomorrow</option><option value="this-week">This Week</option><option value="next-week">Next Week</option></select></div>
-                            <button type="submit" class="btn btn-primary"><span>Schedule Demo</span><i class="fas fa-calendar-check"></i></button>
-                        </form></div>
+                
+                const iconMap = {
+                    'success': 'check-circle',
+                    'error': 'exclamation-circle',
+                    'info': 'info-circle'
+                };
+                
+                notif.innerHTML = `
+                    <i class="fas fa-${iconMap[type]}"></i>
+                    <div class="notification-content">
+                        <h6>${type.charAt(0).toUpperCase() + type.slice(1)}</h6>
+                        <p>${msg}</p>
                     </div>
+                    <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
                 `;
-                modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:3000;overflow-y:auto;';
-                document.body.appendChild(modal);
-                const close = modal.querySelector('.modal-close');
-                close.addEventListener('click', () => modal.remove());
-                modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
-                document.getElementById('demoForm').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const name = document.getElementById('demo-name').value.trim();
-                    const email = document.getElementById('demo-email').value.trim();
-                    const school = document.getElementById('demo-school').value.trim();
-                    const phone = document.getElementById('demo-phone').value.trim();
-                    const date = document.getElementById('demo-date').value;
-                    if (!name || !email || !school || !phone || !date) { showNotification('Please fill all fields.', 'error'); return; }
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showNotification('Valid email required.', 'error'); return; }
-                    showNotification('Demo scheduled successfully! Our team will contact you to confirm the timing.', 'success');
-                    modal.remove();
-                });
-            }
-            window.showDemoModal = showDemoModal;
+                
+                container.appendChild(notif);
+                
+                // Trigger animation
+                requestAnimationFrame(() => notif.classList.add('show'));
+                
+                // Auto dismiss
+                setTimeout(() => {
+                    notif.classList.remove('show');
+                    setTimeout(() => notif.remove(), 400);
+                }, 5000);
+            };
         })();
     </script>
 </body>
